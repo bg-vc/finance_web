@@ -13,6 +13,6 @@ class Routes {
       return null;
     });
 
-    router.define('/home', handler: homePcHandler);
+    router.define('/vault', handler: vaultPcHandler);
   }
 }

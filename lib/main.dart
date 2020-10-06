@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'common/platform.dart';
-import 'page/pc/home_pc_page.dart';
+import 'page/pc/vault_pc_page.dart';
 import 'router/application.dart';
 import 'router/router.dart';
 
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: 'Vault BG-Finance',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
-      home:HomePcPage(),
+      home:VaultPcPage(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
       ],

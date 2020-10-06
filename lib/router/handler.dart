@@ -1,8 +1,8 @@
-import 'package:finance_web/page/pc/home_pc_page.dart';
+import 'package:finance_web/page/pc/vault_pc_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
-Handler homePcHandler =
+Handler vaultPcHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  return HomePcPage();
+  return VaultPcPage();
 });
