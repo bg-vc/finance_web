@@ -6,12 +6,12 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class VaultPcPage extends StatefulWidget {
+class FarmPcPage extends StatefulWidget {
   @override
-  _VaultPcPageState createState() => _VaultPcPageState();
+  _FarmPcPageState createState() => _FarmPcPageState();
 }
 
-class _VaultPcPageState extends State<VaultPcPage> {
+class _FarmPcPageState extends State<FarmPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -19,7 +19,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     super.initState();
     if (mounted) {
       setState(() {
-        CommonProvider.changeHomeIndex(0);
+        CommonProvider.changeHomeIndex(1);
       });
     }
   }
@@ -38,6 +38,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         backgroundColor: MyColors.bg,
         key: _scaffoldKey,
         appBar: _appBarWidget(context),
+        drawer: _drawerWidget(context),
         body: Column(
           children: <Widget>[
             Expanded(
@@ -59,7 +60,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           Expanded(
             child: Container(
               child: Center(
-                child: Text('Vault BG-Finance'),
+                child: Text('Farm BG-Finance'),
               ),
             ),
           ),
@@ -102,6 +103,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
       ),
     );
   }
+
 
   List<Widget> _actionWidget(BuildContext context) {
     List<String> _homeList = CommonProvider.homeList;
@@ -149,4 +151,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
+  Widget _drawerWidget(BuildContext context) {
+    return null;
+  }
 }
