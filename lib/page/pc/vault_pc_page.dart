@@ -57,13 +57,58 @@ class _VaultPcPageState extends State<VaultPcPage> {
       child: Column(
         children: <Widget>[
           Expanded(
-            child: Container(
-              child: Center(
-                child: Text('Vault BG-Finance'),
+            child: _bodyWidget(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _bodyWidget(BuildContext context) {
+    return Container(
+      color: MyColors.bg,
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 50),
+          _oneWidget(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _oneWidget(BuildContext context) {
+    return InkWell(
+      onTap: () {
+
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 1200,
+            height: 120,
+            child: Card(
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              child: Container(
+                child: Center(
+                  child: Text('Value Finance'),
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _twoWidget(BuildContext context) {
+    return InkWell(
+      onTap: () {
+
+      },
+      child: Container(
+
       ),
     );
   }
