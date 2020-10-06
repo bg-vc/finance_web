@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class HomePcPage extends StatefulWidget {
@@ -10,8 +8,6 @@ class HomePcPage extends StatefulWidget {
 class _HomePcPageState extends State<HomePcPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-
-    );
+    return Container();
   }
 }
