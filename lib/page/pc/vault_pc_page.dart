@@ -34,7 +34,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
 
   @override
   Widget build(BuildContext context) {
-    LocalScreenUtil.instance = LocalScreenUtil.getInstance()..init(context);
+    LocalScreenUtil.instance = LocalScreenUtil.getInstance()
+      ..init(context);
     return Material(
       color: MyColors.bg,
       child: Scaffold(
@@ -94,8 +95,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             height: 120,
             child: Card(
               elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -129,6 +129,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   _topBizWidget(context),
+                  SizedBox(height: 50),
+                  _bottomBizWidget(context),
                 ],
               ),
             ),
@@ -291,17 +293,243 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
+  Widget _bottomBizWidget(BuildContext context) {
+    return  Container(
+      width: 1200,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 500,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '余额: 66.6126 USDT',
+                    style: GoogleFonts.lato(
+                      fontSize: 15,
+                      color: MyColors.grey700,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                    color: MyColors.white,
+                    border: Border.all(width: 0.6, color: MyColors.blue700),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: MaterialButton(
+                    color: MyColors.white,
+                    disabledColor: MyColors.white,
+                    child: Container(
+                      width: 500,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(left: 10),
+                      child: TextFormField(
+                        enableInteractiveSelection: false,
+                        cursorColor: MyColors.black87,
+                        decoration: InputDecoration(
+                          hintText: '',
+                          hintStyle: GoogleFonts.lato(
+                            color: Colors.grey[500],
+                            fontSize: 16,
+                            letterSpacing: 0.5,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: GoogleFonts.lato(
+                          color: MyColors.black87,
+                          fontSize: 16,
+                        ),
+                        onChanged: (String value) {
+                        },
+                        onSaved: (String value) {},
+                        onEditingComplete: () {
+                        },
+                      ),
+                    ),
+                    shape: StadiumBorder(side: BorderSide(
+                        color: MyColors.white)),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      _rateWidget(context, 25),
+                      SizedBox(width: 25),
+                      _rateWidget(context, 50),
+                      SizedBox(width: 25),
+                      _rateWidget(context, 75),
+                      SizedBox(width: 25),
+                      _rateWidget(context, 100),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30),
+                InkWell(
+                  onTap: () {
+                  },
+                  child: Container(
+                    color: MyColors.white,
+                    child: Chip(
+                      padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
+                      backgroundColor: MyColors.blue500,
+                      label: Text(
+                        '存入',
+                        style: GoogleFonts.lato(
+                          letterSpacing: 0.5,
+                          color: MyColors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(width: 60),
+          Container(
+            width: 500,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '20.5600 iUSDT',
+                    style: GoogleFonts.lato(
+                      fontSize: 15,
+                      color: MyColors.grey700,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                    color: MyColors.white,
+                    border: Border.all(width: 0.6, color: MyColors.blue700),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: MaterialButton(
+                    color: MyColors.white,
+                    disabledColor: MyColors.white,
+                    child: Container(
+                      width: 500,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(left: 10),
+                      child: TextFormField(
+                        enableInteractiveSelection: false,
+                        cursorColor: MyColors.black87,
+                        decoration: InputDecoration(
+                          hintText: '',
+                          hintStyle: GoogleFonts.lato(
+                            color: Colors.grey[500],
+                            fontSize: 16,
+                            letterSpacing: 0.5,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: GoogleFonts.lato(
+                          color: MyColors.black87,
+                          fontSize: 16,
+                        ),
+                        onChanged: (String value) {
+                        },
+                        onSaved: (String value) {},
+                        onEditingComplete: () {
+                        },
+                      ),
+                    ),
+                    shape: StadiumBorder(side: BorderSide(
+                        color: MyColors.white)),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      _rateWidget(context, 25),
+                      SizedBox(width: 25),
+                      _rateWidget(context, 50),
+                      SizedBox(width: 25),
+                      _rateWidget(context, 75),
+                      SizedBox(width: 25),
+                      _rateWidget(context, 100),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30),
+                InkWell(
+                  onTap: () {
+                  },
+                  child: Container(
+                    color: MyColors.white,
+                    child: Chip(
+                      padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
+                      backgroundColor: MyColors.blue500,
+                      label: Text(
+                        '提取',
+                        style: GoogleFonts.lato(
+                          letterSpacing: 0.5,
+                          color: MyColors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _rateWidget(BuildContext context, value) {
+    return InkWell(
+      onTap: () {
+        print('111');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: MyColors.white,
+          border: Border.all(width: 0.6, color: MyColors.blue500),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
+          child: Text(
+            '$value%',
+            style: GoogleFonts.lato(
+              letterSpacing: 0.5,
+              color: MyColors.grey700,
+              fontSize: 14,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _appBarWidget(BuildContext context) {
     return AppBar(
       toolbarHeight: 60,
       titleSpacing: 0.0,
       leading: _leadingWidget(context),
       title: Container(
-        margin: EdgeInsets.only(left: LocalScreenUtil.getInstance().setWidth(20)),
+        margin: EdgeInsets.only(
+            left: LocalScreenUtil.getInstance().setWidth(20)),
         child: Row(
           children: [
             Container(
-              child: Image.asset('images/aaa.png', fit: BoxFit.contain, width: 80, height: 80),
+              child: Image.asset(
+                  'images/aaa.png', fit: BoxFit.contain, width: 80, height: 80),
             ),
           ],
         ),
@@ -365,9 +593,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
           });
         }
         if (index == 0) {
-          Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
+          Application.router.navigateTo(
+              context, 'vault', transition: TransitionType.fadeIn);
         } else if (index == 1) {
-          Application.router.navigateTo(context, 'farm', transition: TransitionType.fadeIn);
+          Application.router.navigateTo(
+              context, 'farm', transition: TransitionType.fadeIn);
         }
       },
     );
