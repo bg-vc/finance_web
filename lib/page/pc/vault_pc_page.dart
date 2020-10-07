@@ -6,7 +6,6 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 
 class VaultPcPage extends StatefulWidget {
   @override
@@ -34,8 +33,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
 
   @override
   Widget build(BuildContext context) {
-    LocalScreenUtil.instance = LocalScreenUtil.getInstance()
-      ..init(context);
+    LocalScreenUtil.instance = LocalScreenUtil.getInstance()..init(context);
     return Material(
       color: MyColors.bg,
       child: Scaffold(
@@ -95,7 +93,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
             height: 120,
             child: Card(
               elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -124,7 +123,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
             height: 360,
             child: Card(
               elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -280,7 +280,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   color: MyColors.blue500,
                   alignment: Alignment.center,
                   child: Icon(
-                    !_layoutFlag ? CupertinoIcons.down_arrow : CupertinoIcons.up_arrow,
+                    !_layoutFlag
+                        ? CupertinoIcons.down_arrow
+                        : CupertinoIcons.up_arrow,
                     size: 23,
                     color: MyColors.white,
                   ),
@@ -294,7 +296,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
   }
 
   Widget _bottomBizWidget(BuildContext context) {
-    return  Container(
+    return Container(
       width: 1200,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -343,15 +345,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                           color: MyColors.black87,
                           fontSize: 16,
                         ),
-                        onChanged: (String value) {
-                        },
+                        onChanged: (String value) {},
                         onSaved: (String value) {},
-                        onEditingComplete: () {
-                        },
+                        onEditingComplete: () {},
                       ),
                     ),
-                    shape: StadiumBorder(side: BorderSide(
-                        color: MyColors.white)),
+                    shape:
+                        StadiumBorder(side: BorderSide(color: MyColors.white)),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -371,12 +371,12 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
                 SizedBox(height: 30),
                 InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Container(
                     color: MyColors.white,
                     child: Chip(
-                      padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
+                      padding: EdgeInsets.only(
+                          left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
                         '存入',
@@ -437,15 +437,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                           color: MyColors.black87,
                           fontSize: 16,
                         ),
-                        onChanged: (String value) {
-                        },
+                        onChanged: (String value) {},
                         onSaved: (String value) {},
-                        onEditingComplete: () {
-                        },
+                        onEditingComplete: () {},
                       ),
                     ),
-                    shape: StadiumBorder(side: BorderSide(
-                        color: MyColors.white)),
+                    shape:
+                        StadiumBorder(side: BorderSide(color: MyColors.white)),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -465,12 +463,12 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
                 SizedBox(height: 30),
                 InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Container(
                     color: MyColors.white,
                     child: Chip(
-                      padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
+                      padding: EdgeInsets.only(
+                          left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
                         '提取',
@@ -526,13 +524,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
       titleSpacing: 0.0,
       leading: _leadingWidget(context),
       title: Container(
-        margin: EdgeInsets.only(
-            left: LocalScreenUtil.getInstance().setWidth(20)),
+        margin:
+            EdgeInsets.only(left: LocalScreenUtil.getInstance().setWidth(20)),
         child: Row(
           children: [
             Container(
-              child: Image.asset(
-                  'images/aaa.png', fit: BoxFit.contain, width: 80, height: 80),
+              child: Image.asset('images/aaa.png',
+                  fit: BoxFit.contain, width: 80, height: 80),
             ),
           ],
         ),
@@ -572,35 +570,52 @@ class _VaultPcPageState extends State<VaultPcPage> {
     int _homeIndex = CommonProvider.homeIndex;
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
-      child: Container(
-          color: MyColors.bg,
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 30, right: 30),
-            child: Text(
-              '${_homeList[index]}',
-              style: GoogleFonts.lato(
-                fontSize: 16.0,
-                letterSpacing: 1,
-                color: _homeIndex == index ? MyColors.black : MyColors.grey700,
-                fontWeight: FontWeight.w500,
+      child: index != 2
+          ? Container(
+              color: MyColors.bg,
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: Text(
+                  '${_homeList[index]}',
+                  style: GoogleFonts.lato(
+                    fontSize: 16.0,
+                    letterSpacing: 1,
+                    color:
+                        _homeIndex == index ? MyColors.black : MyColors.grey700,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ))
+          : Container(
+              color: MyColors.bg,
+              child: Chip(
+                padding:  EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
+                backgroundColor: MyColors.blue500,
+                label: Text(
+                  '连接钱包',
+                  style: GoogleFonts.lato(
+                    letterSpacing: 0.5,
+                    color: MyColors.white,
+                    fontSize: 15,
+                  ),
+                ),
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
-          )),
       onTap: () async {
-        if (mounted) {
+        if (index != 2) {
           setState(() {
             CommonProvider.changeHomeIndex(index);
           });
         }
         if (index == 0) {
-          Application.router.navigateTo(
-              context, 'vault', transition: TransitionType.fadeIn);
+          Application.router
+              .navigateTo(context, 'vault', transition: TransitionType.fadeIn);
         } else if (index == 1) {
-          Application.router.navigateTo(
-              context, 'farm', transition: TransitionType.fadeIn);
+          Application.router
+              .navigateTo(context, 'farm', transition: TransitionType.fadeIn);
         }
       },
     );
