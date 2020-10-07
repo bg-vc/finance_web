@@ -96,159 +96,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
               elevation: 0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              child: _oneBizWidget(context),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _oneBizWidget(BuildContext context) {
-    return Container(
-      width: 1200,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            child: ClipOval(
-              child: Image.asset(
-                'images/usdt.png',
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 30),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    'USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    'USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 150),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    '66.6126 USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    '余额',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 220),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    '20.5600 USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    '已存入',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 100),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    '11.68%',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    '回报率',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 100),
-          Container(
-            child: Card(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    _layoutFlag = !_layoutFlag;
-                  });
-                },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  color: MyColors.blue500,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    CupertinoIcons.down_arrow,
-                    size: 23,
-                    color: MyColors.white,
-                  ),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _topBizWidget(context),
+                ],
               ),
             ),
           ),
@@ -273,7 +125,12 @@ class _VaultPcPageState extends State<VaultPcPage> {
             child: Card(
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              child: _twoBizWidget(context),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _topBizWidget(context),
+                ],
+              ),
             ),
           ),
         ],
@@ -281,7 +138,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _twoBizWidget(BuildContext context) {
+  Widget _topBizWidget(BuildContext context) {
     return Container(
       width: 1200,
       child: Row(
@@ -421,7 +278,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   color: MyColors.blue500,
                   alignment: Alignment.center,
                   child: Icon(
-                    CupertinoIcons.up_arrow,
+                    !_layoutFlag ? CupertinoIcons.down_arrow : CupertinoIcons.up_arrow,
                     size: 23,
                     color: MyColors.white,
                   ),
@@ -433,7 +290,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
       ),
     );
   }
-
 
   Widget _appBarWidget(BuildContext context) {
     return AppBar(
