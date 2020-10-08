@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeProvider with ChangeNotifier {
+
+class IndexProvider with ChangeNotifier {
   //深色模式 0: 关闭 1:开启
   int _darkMode = 0;
 
@@ -25,4 +26,19 @@ class ThemeProvider with ChangeNotifier {
     prefs.setInt(_darkModeKey, _darkMode);
     notifyListeners();
   }
+
+  bool _tronFlag = false;
+
+  bool get tronFlag => _tronFlag;
+
+  String _account = '';
+
+  String get account => _account;
+
+  void changeAccount(String value) {
+    print('changeAccount 000');
+    _account = value;
+    notifyListeners();
+  }
+
 }

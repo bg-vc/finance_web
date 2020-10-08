@@ -1,11 +1,18 @@
+import 'dart:async';
+
 import 'package:finance_web/common/color.dart';
 import 'package:finance_web/provider/common_provider.dart';
+import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
 import 'package:finance_web/util/screen_util.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:provider/provider.dart';
+import 'dart:js' as js;
+
 
 class VaultPcPage extends StatefulWidget {
   @override
@@ -15,19 +22,28 @@ class VaultPcPage extends StatefulWidget {
 class _VaultPcPageState extends State<VaultPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _layoutFlag = false;
+  bool tronFlag = false;
+  Timer _timer;
 
   @override
   void initState() {
+    print('VaultPcPage 111');
     super.initState();
     if (mounted) {
       setState(() {
         CommonProvider.changeHomeIndex(0);
       });
     }
+    _reloadAccount();
   }
 
   @override
   void dispose() {
+    if (_timer != null) {
+      if (_timer.isActive) {
+        _timer.cancel();
+      }
+    }
     super.dispose();
   }
 
@@ -524,13 +540,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
       titleSpacing: 0.0,
       leading: _leadingWidget(context),
       title: Container(
-        margin:
-            EdgeInsets.only(left: LocalScreenUtil.getInstance().setWidth(20)),
+        margin: EdgeInsets.only(left: LocalScreenUtil.getInstance().setWidth(20)),
         child: Row(
           children: [
             Container(
-              child: Image.asset('images/aaa.png',
-                  fit: BoxFit.contain, width: 80, height: 80),
+              child: Image.asset('images/aaa.png', fit: BoxFit.contain, width: 80, height: 80),
             ),
           ],
         ),
@@ -561,12 +575,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
     for (int i = 0; i < _homeList.length; i++) {
       _widgetList.add(_actionItemWidget(context, i));
     }
-    _widgetList
-        .add(SizedBox(width: LocalScreenUtil.getInstance().setWidth(50)));
+    _widgetList.add(SizedBox(width: LocalScreenUtil.getInstance().setWidth(50)));
     return _widgetList;
   }
 
   Widget _actionItemWidget(BuildContext context, int index) {
+    String account = Provider.of<IndexProvider>(context).account;
+    print('111:' + account);
     int _homeIndex = CommonProvider.homeIndex;
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
@@ -595,7 +610,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 padding:  EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
                 backgroundColor: MyColors.blue500,
                 label: Text(
-                  '连接钱包',
+                  account == '' ? '连接钱包' : account.substring(0, 4) + '...' + account.substring(account.length-4, account.length),
                   style: GoogleFonts.lato(
                     letterSpacing: 0.5,
                     color: MyColors.white,
@@ -620,4 +635,24 @@ class _VaultPcPageState extends State<VaultPcPage> {
       },
     );
   }
+
+  _reloadAccount() async {
+    _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
+      tronFlag = js.context.hasProperty('tronWeb');
+      print('_reloadAccount 111 ' + tronFlag.toString());
+      if (tronFlag) {
+        var result = js.context["tronWeb"]["defaultAddress"]["base58"];
+        if (result.toString() != 'false') {
+          Provider.of<IndexProvider>(context, listen: false).changeAccount(
+              result.toString());
+        } else {
+          Provider.of<IndexProvider>(context, listen: false).changeAccount('');
+        }
+      } else {
+        Provider.of<IndexProvider>(context, listen: false).changeAccount('');
+      }
+    });
+  }
 }
+
+

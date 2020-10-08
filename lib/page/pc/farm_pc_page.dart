@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:finance_web/common/color.dart';
 import 'package:finance_web/provider/common_provider.dart';
+import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
 import 'package:finance_web/util/screen_util.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:provider/provider.dart';
+import 'dart:js' as js;
+
 
 class FarmPcPage extends StatefulWidget {
   @override
@@ -13,19 +20,28 @@ class FarmPcPage extends StatefulWidget {
 
 class _FarmPcPageState extends State<FarmPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool tronFlag = false;
+  Timer _timer;
 
   @override
   void initState() {
+    print('FarmPcPage 000');
     super.initState();
     if (mounted) {
       setState(() {
         CommonProvider.changeHomeIndex(1);
       });
     }
+    _reloadAccount();
   }
 
   @override
   void dispose() {
+    if (_timer != null) {
+      if (_timer.isActive) {
+        _timer.cancel();
+      }
+    }
     super.dispose();
   }
 
@@ -79,8 +95,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
         child: Row(
           children: [
             Container(
-              child: Image.asset('images/aaa.png',
-                  fit: BoxFit.contain, width: 80, height: 80),
+              child: Image.asset('images/aaa.png', fit: BoxFit.contain, width: 80, height: 80),
             ),
           ],
         ),
@@ -117,6 +132,8 @@ class _FarmPcPageState extends State<FarmPcPage> {
   }
 
   Widget _actionItemWidget(BuildContext context, int index) {
+    String account = Provider.of<IndexProvider>(context).account;
+    print('222:' + account);
     int _homeIndex = CommonProvider.homeIndex;
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
@@ -145,7 +162,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
           padding:  EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
           backgroundColor: MyColors.blue500,
           label: Text(
-            '连接钱包',
+            account == '' ? '连接钱包' : account.substring(0, 4) + '...' + account.substring(account.length-4, account.length),
             style: GoogleFonts.lato(
               letterSpacing: 0.5,
               color: MyColors.white,
@@ -169,5 +186,23 @@ class _FarmPcPageState extends State<FarmPcPage> {
         }
       },
     );
+  }
+
+  _reloadAccount() async {
+    _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
+      tronFlag = js.context.hasProperty('tronWeb');
+      print('_reloadAccount 222 ' + tronFlag.toString());
+      if (tronFlag) {
+        var result = js.context["tronWeb"]["defaultAddress"]["base58"];
+        if (result.toString() != 'false') {
+          Provider.of<IndexProvider>(context, listen: false).changeAccount(
+              result.toString());
+        } else {
+          Provider.of<IndexProvider>(context, listen: false).changeAccount('');
+        }
+      } else {
+        Provider.of<IndexProvider>(context, listen: false).changeAccount('');
+      }
+    });
   }
 }

@@ -1,4 +1,4 @@
-import 'package:finance_web/provider/theme_provider.dart';
+import 'package:finance_web/provider/index_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart'as fluro;
@@ -17,7 +17,7 @@ void main() {
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => ThemeProvider()..init()),
+      ChangeNotifierProvider(create: (_) => IndexProvider()..init()),
     ],
     child: MyApp(),
   ));
