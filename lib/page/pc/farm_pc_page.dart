@@ -38,7 +38,6 @@ class _FarmPcPageState extends State<FarmPcPage> {
         backgroundColor: MyColors.bg,
         key: _scaffoldKey,
         appBar: _appBarWidget(context),
-        drawer: _drawerWidget(context),
         body: Column(
           children: <Widget>[
             Expanded(
@@ -75,11 +74,13 @@ class _FarmPcPageState extends State<FarmPcPage> {
       titleSpacing: 0.0,
       leading: _leadingWidget(context),
       title: Container(
-        margin: EdgeInsets.only(left: LocalScreenUtil.getInstance().setWidth(20)),
+        margin:
+        EdgeInsets.only(left: LocalScreenUtil.getInstance().setWidth(20)),
         child: Row(
           children: [
             Container(
-              child: Image.asset('images/aaa.png', fit: BoxFit.contain, width: 80, height: 80),
+              child: Image.asset('images/aaa.png',
+                  fit: BoxFit.contain, width: 80, height: 80),
             ),
           ],
         ),
@@ -104,14 +105,14 @@ class _FarmPcPageState extends State<FarmPcPage> {
     );
   }
 
-
   List<Widget> _actionWidget(BuildContext context) {
     List<String> _homeList = CommonProvider.homeList;
     List<Widget> _widgetList = [];
     for (int i = 0; i < _homeList.length; i++) {
       _widgetList.add(_actionItemWidget(context, i));
     }
-    _widgetList.add(SizedBox(width: LocalScreenUtil.getInstance().setWidth(50)));
+    _widgetList
+        .add(SizedBox(width: LocalScreenUtil.getInstance().setWidth(50)));
     return _widgetList;
   }
 
@@ -119,7 +120,8 @@ class _FarmPcPageState extends State<FarmPcPage> {
     int _homeIndex = CommonProvider.homeIndex;
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
-      child: Container(
+      child: index != 2
+          ? Container(
           color: MyColors.bg,
           child: Container(
             alignment: Alignment.center,
@@ -129,29 +131,43 @@ class _FarmPcPageState extends State<FarmPcPage> {
               style: GoogleFonts.lato(
                 fontSize: 16.0,
                 letterSpacing: 1,
-                color: _homeIndex == index ? MyColors.black : MyColors.grey700,
+                color:
+                _homeIndex == index ? MyColors.black : MyColors.grey700,
                 fontWeight: FontWeight.w500,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-          )),
+          ))
+          : Container(
+        color: MyColors.bg,
+        child: Chip(
+          padding:  EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
+          backgroundColor: MyColors.blue500,
+          label: Text(
+            '连接钱包',
+            style: GoogleFonts.lato(
+              letterSpacing: 0.5,
+              color: MyColors.white,
+              fontSize: 15,
+            ),
+          ),
+        ),
+      ),
       onTap: () async {
-        if (mounted) {
+        if (index != 2) {
           setState(() {
             CommonProvider.changeHomeIndex(index);
           });
         }
         if (index == 0) {
-          Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
+          Application.router
+              .navigateTo(context, 'vault', transition: TransitionType.fadeIn);
         } else if (index == 1) {
-          Application.router.navigateTo(context, 'farm', transition: TransitionType.fadeIn);
+          Application.router
+              .navigateTo(context, 'farm', transition: TransitionType.fadeIn);
         }
       },
     );
-  }
-
-  Widget _drawerWidget(BuildContext context) {
-    return null;
   }
 }
