@@ -163,8 +163,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
           EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
           backgroundColor: MyColors.blue500,
           label: Text(
-            account == ''
-                ? '连接钱包' : account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length),
+            account == '' ? '连接钱包' : account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length),
             style: GoogleFonts.lato(
               letterSpacing: 0.5,
               color: MyColors.white,
@@ -185,7 +184,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
         } else if (index == 1) {
           Application.router
               .navigateTo(context, 'farm', transition: TransitionType.fadeIn);
-        } else if (index == 2) {
+        } else if (index == 2 && account == '') {
           showDialog(
             context: context,
             child: AlertDialog(

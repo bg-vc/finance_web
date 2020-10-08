@@ -630,12 +630,10 @@ class _VaultPcPageState extends State<VaultPcPage> {
           });
         }
         if (index == 0) {
-          Application.router
-              .navigateTo(context, 'vault', transition: TransitionType.fadeIn);
+          Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
         } else if (index == 1) {
-          Application.router
-              .navigateTo(context, 'farm', transition: TransitionType.fadeIn);
-        } else if (index == 2) {
+          Application.router.navigateTo(context, 'farm', transition: TransitionType.fadeIn);
+        } else if (index == 2 && account == '') {
           showDialog(
             context: context,
             child: AlertDialog(
