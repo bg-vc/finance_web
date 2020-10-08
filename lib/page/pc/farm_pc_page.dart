@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:finance_web/common/color.dart';
+import 'package:finance_web/config/service_config.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
@@ -11,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
 import 'dart:js' as js;
+
+import 'package:url_launcher/url_launcher.dart';
 
 
 class FarmPcPage extends StatefulWidget {
@@ -133,12 +136,10 @@ class _FarmPcPageState extends State<FarmPcPage> {
 
   Widget _actionItemWidget(BuildContext context, int index) {
     String account = Provider.of<IndexProvider>(context).account;
-    print('222:' + account);
     int _homeIndex = CommonProvider.homeIndex;
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
-      child: index != 2
-          ? Container(
+      child: index != 2 ? Container(
           color: MyColors.bg,
           child: Container(
             alignment: Alignment.center,
@@ -148,8 +149,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
               style: GoogleFonts.lato(
                 fontSize: 16.0,
                 letterSpacing: 1,
-                color:
-                _homeIndex == index ? MyColors.black : MyColors.grey700,
+                color: _homeIndex == index ? MyColors.black : MyColors.grey700,
                 fontWeight: FontWeight.w500,
               ),
               maxLines: 1,
@@ -159,10 +159,12 @@ class _FarmPcPageState extends State<FarmPcPage> {
           : Container(
         color: MyColors.bg,
         child: Chip(
-          padding:  EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
+          padding:
+          EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
           backgroundColor: MyColors.blue500,
           label: Text(
-            account == '' ? '连接钱包' : account.substring(0, 4) + '...' + account.substring(account.length-4, account.length),
+            account == ''
+                ? '连接钱包' : account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length),
             style: GoogleFonts.lato(
               letterSpacing: 0.5,
               color: MyColors.white,
@@ -183,6 +185,60 @@ class _FarmPcPageState extends State<FarmPcPage> {
         } else if (index == 1) {
           Application.router
               .navigateTo(context, 'farm', transition: TransitionType.fadeIn);
+        } else if (index == 2) {
+          showDialog(
+            context: context,
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0))
+              ),
+              content: Container(
+                width: 300,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Color(0xFFFFFF),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          '请使用TronLink钱包登录',
+                          style: GoogleFonts.lato(
+                            fontSize: 18.0,
+                            letterSpacing: 0.2,
+                            color: MyColors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      InkWell(
+                          onTap: () {
+                            launch(tronLinkChrome).catchError((error) {
+                              print('launch error:$error');
+                            });
+                          },
+                          child: Container(
+                            child: Text(
+                              '还没安装TronLink？ 请点击此处>>',
+                              style: GoogleFonts.lato(
+                                fontSize: 15.0,
+                                letterSpacing: 0.2,
+                                color: MyColors.black87,
+                                //decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
         }
       },
     );
