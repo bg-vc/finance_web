@@ -168,6 +168,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
       onTap: () {
         setState(() {
           _layoutFlag = !_layoutFlag;
+          Provider.of<IndexProvider>(context, listen: false).changeDepositAmount('');
+          Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount('');
         });
       },
       child: Container(
