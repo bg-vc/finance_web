@@ -64,8 +64,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _depositAmount.length))));
     _withdrawAmountController =  TextEditingController.fromValue(TextEditingValue(text: _withdrawAmount,
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _withdrawAmount.length))));
-    _depositAmount  = Provider.of<IndexProvider>(context).depositAmount;
-    _withdrawAmount  = Provider.of<IndexProvider>(context).withdrawAmount;
+    //_depositAmount  = Provider.of<IndexProvider>(context).depositAmount;
+    //_withdrawAmount  = Provider.of<IndexProvider>(context).withdrawAmount;
 
     return Material(
       color: MyColors.bg,
@@ -168,8 +168,10 @@ class _VaultPcPageState extends State<VaultPcPage> {
       onTap: () {
         setState(() {
           _layoutFlag = !_layoutFlag;
-          Provider.of<IndexProvider>(context, listen: false).changeDepositAmount('');
-          Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount('');
+          //Provider.of<IndexProvider>(context, listen: false).changeDepositAmount('');
+          //Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount('');
+          _depositAmount = '';
+          _withdrawAmount = '';
         });
       },
       child: Container(
@@ -416,9 +418,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
                         inputFormatters: [MyNumberTextInputFormatter(digit:6)],
                         onChanged: (String value) {
                           if (value != null && value != '') {
-                            Provider.of<IndexProvider>(context, listen: false).changeDepositAmount(value);
+                            //Provider.of<IndexProvider>(context, listen: false).changeDepositAmount(value);
+                            _depositAmount = value;
                           } else {
-                            Provider.of<IndexProvider>(context, listen: false).changeDepositAmount('');
+                            //Provider.of<IndexProvider>(context, listen: false).changeDepositAmount('');
+                            _depositAmount = '';
                           }
                         },
                         onSaved: (String value) {},
@@ -516,9 +520,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
                         inputFormatters: [MyNumberTextInputFormatter(digit:6)],
                         onChanged: (String value) {
                           if (value != null && value != '') {
-                            Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount(value);
+                            //Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount(value);
+                            _withdrawAmount = value;
                           } else {
-                            Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount('');
+                            //Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount('');
+                            _withdrawAmount = '';
                           }
                         },
                         onSaved: (String value) {},
@@ -587,9 +593,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
             double value = NumUtil.multiply(balance, rateDouble);
             setState(() {
               if (type == 1) {
-                Provider.of<IndexProvider>(context, listen: false).changeDepositAmount(value.toString());
+                //Provider.of<IndexProvider>(context, listen: false).changeDepositAmount(value.toString());
+                _depositAmount = value.toString();
               } else {
-                Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount(value.toString());
+                //Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount(value.toString());
+                _withdrawAmount = value.toString();
               }
             });
           }

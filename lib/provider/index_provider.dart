@@ -40,7 +40,7 @@ class IndexProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  String _depositAmount = '';
+  /*String _depositAmount = '';
   String get depositAmount => _depositAmount;
 
   changeDepositAmount(String value) {
@@ -54,6 +54,6 @@ class IndexProvider with ChangeNotifier {
   changeWithdrawAmount(String value) {
     _withdrawAmount = value;
     notifyListeners();
-  }
+  }*/
 
 }
