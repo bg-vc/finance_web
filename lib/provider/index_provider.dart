@@ -44,7 +44,6 @@ class IndexProvider with ChangeNotifier {
   String get depositAmount => _depositAmount;
 
   changeDepositAmount(String value) {
-    print('changeDepositAmount:' + value);
     _depositAmount = value;
     notifyListeners();
   }

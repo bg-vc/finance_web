@@ -764,7 +764,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
       tronFlag = js.context.hasProperty('tronWeb');
-      print('_reloadAccount 111 ' + tronFlag.toString());
+      //print('_reloadAccount 111 ' + tronFlag.toString());
       if (tronFlag) {
         var result = js.context["tronWeb"]["defaultAddress"]["base58"];
         if (result.toString() != 'false') {
