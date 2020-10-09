@@ -545,27 +545,24 @@ class _VaultPcPageState extends State<VaultPcPage> {
   }
 
   Widget _rateWidget(BuildContext context, value) {
-    return Container(
-      color: MyColors.white,
+    return Material(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: InkWell(
+        hoverColor: Colors.white,
+        splashColor: Color(0x802196F3),
+        highlightColor: Color(0x802196F3),
         onTap: () {
           print('111');
         },
         child: Container(
-          decoration: BoxDecoration(
-            color: MyColors.white,
-            border: Border.all(width: 0.8, color: Colors.blue[800]),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
-            child: Text(
-              '$value%',
-              style: GoogleFonts.lato(
-                letterSpacing: 0.5,
-                color: MyColors.grey700,
-                fontSize: 14,
-              ),
+          padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
+          child: Text(
+            '$value%',
+            style: GoogleFonts.lato(
+              letterSpacing: 0.5,
+              color: Colors.blue[800],
+              fontSize: 14,
             ),
           ),
         ),
