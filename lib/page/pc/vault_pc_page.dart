@@ -5,10 +5,12 @@ import 'package:finance_web/config/service_config.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
+import 'package:finance_web/util/common_util.dart';
 import 'package:finance_web/util/screen_util.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
@@ -106,8 +108,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             height: 120,
             child: Card(
               elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -200,7 +201,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ],
               ),
             ),
-            SizedBox(width: 150),
+            SizedBox(width: 100),
             Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -227,7 +228,39 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ],
               ),
             ),
-            SizedBox(width: 220),
+            SizedBox(width: 100),
+            InkWell(
+              onTap: () {
+
+              },
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        'TBTj...rDjN',
+                        style: GoogleFonts.lato(
+                          fontSize: 20,
+                          color: MyColors.black,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Container(
+                      child: Text(
+                        '合约地址',
+                        style: GoogleFonts.lato(
+                          fontSize: 14,
+                          color: MyColors.grey700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(width: 100),
             Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -346,7 +379,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     child: Container(
                       width: 500,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(left: 20),
                       child: TextFormField(
                         enableInteractiveSelection: false,
                         cursorColor: MyColors.black87,
@@ -363,6 +396,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                           color: MyColors.black87,
                           fontSize: 16,
                         ),
+                        //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
+                        inputFormatters: [MyNumberTextInputFormatter(digit:6)],
                         onChanged: (String value) {},
                         onSaved: (String value) {},
                         onEditingComplete: () {},
@@ -455,6 +490,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                           color: MyColors.black87,
                           fontSize: 16,
                         ),
+                        //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
+                        inputFormatters: [MyNumberTextInputFormatter(digit:6)],
                         onChanged: (String value) {},
                         onSaved: (String value) {},
                         onEditingComplete: () {},
