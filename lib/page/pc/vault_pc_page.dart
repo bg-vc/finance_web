@@ -98,11 +98,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
 
   Widget _oneWidget(BuildContext context) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          _layoutFlag = !_layoutFlag;
-        });
-      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -112,7 +107,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             child: Card(
               elevation: 0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -129,9 +124,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
   Widget _twoWidget(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          _layoutFlag = !_layoutFlag;
-        });
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -141,8 +133,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             height: 360,
             child: Card(
               elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -159,156 +150,165 @@ class _VaultPcPageState extends State<VaultPcPage> {
   }
 
   Widget _topBizWidget(BuildContext context) {
-    return Container(
-      width: 1200,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            child: ClipOval(
-              child: Image.asset(
-                'images/usdt.png',
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 30),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    'USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    'USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 150),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    '66.6126 USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    '余额',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 220),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    '20.5600 USDT',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    '已存入',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 100),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    '11.68%',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: MyColors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  child: Text(
-                    '回报率',
-                    style: GoogleFonts.lato(
-                      fontSize: 14,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 100),
-          Container(
-            child: Card(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    _layoutFlag = !_layoutFlag;
-                  });
-                },
-                child: Container(
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _layoutFlag = !_layoutFlag;
+        });
+      },
+      child: Container(
+        color: MyColors.white,
+        width: 1200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              child: ClipOval(
+                child: Image.asset(
+                  'images/usdt.png',
                   width: 50,
                   height: 50,
-                  color: MyColors.blue500,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    !_layoutFlag
-                        ? CupertinoIcons.down_arrow
-                        : CupertinoIcons.up_arrow,
-                    size: 23,
-                    color: MyColors.white,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(width: 30),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      'USDT',
+                      style: GoogleFonts.lato(
+                        fontSize: 20,
+                        color: MyColors.black,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    child: Text(
+                      'USDT',
+                      style: GoogleFonts.lato(
+                        fontSize: 14,
+                        color: MyColors.grey700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 150),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      '66.6126 USDT',
+                      style: GoogleFonts.lato(
+                        fontSize: 20,
+                        color: MyColors.black,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    child: Text(
+                      '余额',
+                      style: GoogleFonts.lato(
+                        fontSize: 14,
+                        color: MyColors.grey700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 220),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      '20.5600 USDT',
+                      style: GoogleFonts.lato(
+                        fontSize: 20,
+                        color: MyColors.black,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    child: Text(
+                      '已存入',
+                      style: GoogleFonts.lato(
+                        fontSize: 14,
+                        color: MyColors.grey700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 100),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      '11.68%',
+                      style: GoogleFonts.lato(
+                        fontSize: 20,
+                        color: MyColors.black,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    child: Text(
+                      '回报率',
+                      style: GoogleFonts.lato(
+                        fontSize: 14,
+                        color: MyColors.grey700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 100),
+            Container(
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _layoutFlag = !_layoutFlag;
+                    });
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    color: MyColors.blue500,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      !_layoutFlag
+                          ? CupertinoIcons.down_arrow
+                          : CupertinoIcons.up_arrow,
+                      size: 23,
+                      color: MyColors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -337,7 +337,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   decoration: BoxDecoration(
                     color: MyColors.white,
-                    border: Border.all(width: 0.6, color: MyColors.blue700),
+                    border: Border.all(width: 1.0, color: Colors.blue[800]),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: MaterialButton(
@@ -429,7 +429,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   decoration: BoxDecoration(
                     color: MyColors.white,
-                    border: Border.all(width: 0.6, color: MyColors.blue700),
+                    border: Border.all(width: 1.0, color: Colors.blue[800]),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: MaterialButton(
@@ -517,7 +517,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         child: Container(
           decoration: BoxDecoration(
             color: MyColors.white,
-            border: Border.all(width: 0.6, color: MyColors.blue500),
+            border: Border.all(width: 0.8, color: Colors.blue[800]),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Container(
@@ -579,8 +579,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     for (int i = 0; i < _homeList.length; i++) {
       _widgetList.add(_actionItemWidget(context, i));
     }
-    _widgetList
-        .add(SizedBox(width: LocalScreenUtil.getInstance().setWidth(50)));
+    _widgetList.add(SizedBox(width: LocalScreenUtil.getInstance().setWidth(50)));
     return _widgetList;
   }
 
@@ -609,8 +608,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           : Container(
               color: MyColors.bg,
               child: Chip(
-                padding:
-                    EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
+                padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
                 backgroundColor: MyColors.blue500,
                 label: Text(
                   account == ''
