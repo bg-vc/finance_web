@@ -116,13 +116,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
           Container(
             width: 1200,
             height: 120,
-            decoration: BoxDecoration(
-              color: MyColors.white,
-              border: Border.all(width: 0.8, color: Colors.blue[800]),
-              borderRadius: BorderRadius.circular(30),
-            ),
             child: Card(
-              elevation: 0,
+              elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -147,13 +142,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
           Container(
             width: 1200,
             height: 360,
-            decoration: BoxDecoration(
-              color: MyColors.white,
-              border: Border.all(width: 0.8, color: Colors.blue[800]),
-              borderRadius: BorderRadius.circular(30),
-            ),
             child: Card(
-              elevation: 0,
+              elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -339,6 +329,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             SizedBox(width: 100),
             Container(
               child: Card(
+                elevation: 2,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 child: InkWell(
                   onTap: () {
@@ -389,12 +380,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                    color: MyColors.white,
-                    border: Border.all(width: 1.0, color: Colors.blue[800]),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                Card(
+                  elevation: 2.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
                   child: MaterialButton(
                     color: MyColors.white,
                     disabledColor: MyColors.white,
@@ -457,6 +445,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   child: Container(
                     color: MyColors.white,
                     child: Chip(
+                      elevation: 2,
                       padding: EdgeInsets.only(
                           left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
@@ -482,7 +471,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    '20.5600 iUSDT',
+                    '20.5600 USDT',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -490,13 +479,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                    color: MyColors.white,
-                    border: Border.all(width: 1.0, color: Colors.blue[800]),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                Card(
+                  elevation: 2.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
                   child: MaterialButton(
+                    elevation: 3,
                     color: MyColors.white,
                     disabledColor: MyColors.white,
                     child: Container(
@@ -559,11 +546,12 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   child: Container(
                     color: MyColors.white,
                     child: Chip(
+                      elevation: 2,
                       padding: EdgeInsets.only(
                           left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
-                        '提取',
+                        '赎回',
                         style: GoogleFonts.lato(
                           letterSpacing: 0.5,
                           color: MyColors.white,
@@ -690,6 +678,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           : Container(
               color: MyColors.white,
               child: Chip(
+                elevation: 3,
                 padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
                 backgroundColor: MyColors.blue500,
                 label: Text(
