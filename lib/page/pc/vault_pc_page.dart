@@ -37,7 +37,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
 
   @override
   void initState() {
-    //print('VaultPcPage 111');
     super.initState();
     if (mounted) {
       setState(() {
@@ -66,9 +65,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _withdrawAmount.length))));
 
     return Material(
-      color: MyColors.bg,
+      color: MyColors.white,
       child: Scaffold(
-        backgroundColor: MyColors.bg,
+        backgroundColor: MyColors.white,
         key: _scaffoldKey,
         appBar: _appBarWidget(context),
         body: Column(
@@ -86,7 +85,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
   Widget _mainWidget(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 0, top: 0, right: 0),
-      color: MyColors.bg,
+      color: MyColors.white,
       child: Column(
         children: <Widget>[
           Expanded(
@@ -99,7 +98,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
 
   Widget _bodyWidget(BuildContext context) {
     return Container(
-      color: MyColors.bg,
+      color: MyColors.white,
       child: ListView(
         children: <Widget>[
           SizedBox(height: 50),
@@ -117,6 +116,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
           Container(
             width: 1200,
             height: 120,
+            decoration: BoxDecoration(
+              color: MyColors.white,
+              border: Border.all(width: 0.8, color: Colors.blue[800]),
+              borderRadius: BorderRadius.circular(30),
+            ),
             child: Card(
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -143,6 +147,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
           Container(
             width: 1200,
             height: 360,
+            decoration: BoxDecoration(
+              color: MyColors.white,
+              border: Border.all(width: 0.8, color: Colors.blue[800]),
+              borderRadius: BorderRadius.circular(30),
+            ),
             child: Card(
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -626,7 +635,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           ],
         ),
       ),
-      backgroundColor: MyColors.bg,
+      backgroundColor: MyColors.white,
       elevation: 2.5,
       centerTitle: false,
       actions: _actionWidget(context),
@@ -639,7 +648,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
       child: InkWell(
         onTap: () {},
         child: Container(
-          color: MyColors.bg,
+          color: MyColors.white,
           child: null,
         ),
       ),
@@ -662,7 +671,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
       child: index != 2 ? Container(
-              color: MyColors.bg,
+              color: MyColors.white,
               child: Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(left: 30, right: 30),
@@ -679,7 +688,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
               ))
           : Container(
-              color: MyColors.bg,
+              color: MyColors.white,
               child: Chip(
                 padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
                 backgroundColor: MyColors.blue500,
@@ -766,7 +775,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
       tronFlag = js.context.hasProperty('tronWeb');
-      //print('_reloadAccount 111 ' + tronFlag.toString());
       if (tronFlag) {
         var result = js.context["tronWeb"]["defaultAddress"]["base58"];
         if (result.toString() != 'false') {

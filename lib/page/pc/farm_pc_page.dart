@@ -52,9 +52,9 @@ class _FarmPcPageState extends State<FarmPcPage> {
   Widget build(BuildContext context) {
     LocalScreenUtil.instance = LocalScreenUtil.getInstance()..init(context);
     return Material(
-      color: MyColors.bg,
+      color: MyColors.white,
       child: Scaffold(
-        backgroundColor: MyColors.bg,
+        backgroundColor: MyColors.white,
         key: _scaffoldKey,
         appBar: _appBarWidget(context),
         body: Column(
@@ -72,7 +72,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
   Widget _mainWidget(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 0, top: 0, right: 0),
-      color: MyColors.bg,
+      color: MyColors.white,
       child: Column(
         children: <Widget>[
           Expanded(
@@ -103,7 +103,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
           ],
         ),
       ),
-      backgroundColor: MyColors.bg,
+      backgroundColor: MyColors.white,
       elevation: 2.5,
       centerTitle: false,
       actions: _actionWidget(context),
@@ -116,7 +116,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
       child: InkWell(
         onTap: () {},
         child: Container(
-          color: MyColors.bg,
+          color: MyColors.white,
           child: null,
         ),
       ),
@@ -140,7 +140,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
     List<String> _homeList = CommonProvider.homeList;
     return InkWell(
       child: index != 2 ? Container(
-          color: MyColors.bg,
+          color: MyColors.white,
           child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(left: 30, right: 30),
@@ -157,7 +157,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
             ),
           ))
           : Container(
-        color: MyColors.bg,
+        color: MyColors.white,
         child: Chip(
           padding:
           EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
