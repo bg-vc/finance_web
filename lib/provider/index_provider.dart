@@ -36,8 +36,24 @@ class IndexProvider with ChangeNotifier {
   String get account => _account;
 
   void changeAccount(String value) {
-    print('changeAccount 000');
     _account = value;
+    notifyListeners();
+  }
+
+  String _depositAmount = '';
+  String get depositAmount => _depositAmount;
+
+  changeDepositAmount(String value) {
+    print('changeDepositAmount:' + value);
+    _depositAmount = value;
+    notifyListeners();
+  }
+
+  String _withdrawAmount = '';
+  String get withdrawAmount => _withdrawAmount;
+
+  changeWithdrawAmount(String value) {
+    _withdrawAmount = value;
     notifyListeners();
   }
 

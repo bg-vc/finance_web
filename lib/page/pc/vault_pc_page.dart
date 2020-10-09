@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:common_utils/common_utils.dart';
 import 'package:finance_web/common/color.dart';
 import 'package:finance_web/config/service_config.dart';
 import 'package:finance_web/provider/common_provider.dart';
@@ -10,7 +11,6 @@ import 'package:finance_web/util/screen_util.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
@@ -28,10 +28,16 @@ class _VaultPcPageState extends State<VaultPcPage> {
   bool _layoutFlag = false;
   bool tronFlag = false;
   Timer _timer;
+  String _depositAmount = '';
+  String _withdrawAmount = '';
+
+  TextEditingController _depositAmountController;
+  TextEditingController _withdrawAmountController;
+
 
   @override
   void initState() {
-    print('VaultPcPage 111');
+    //print('VaultPcPage 111');
     super.initState();
     if (mounted) {
       setState(() {
@@ -54,6 +60,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
   @override
   Widget build(BuildContext context) {
     LocalScreenUtil.instance = LocalScreenUtil.getInstance()..init(context);
+    _depositAmountController =  TextEditingController.fromValue(TextEditingValue(text: _depositAmount,
+        selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _depositAmount.length))));
+    _withdrawAmountController =  TextEditingController.fromValue(TextEditingValue(text: _withdrawAmount,
+        selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _withdrawAmount.length))));
+    _depositAmount  = Provider.of<IndexProvider>(context).depositAmount;
+    _withdrawAmount  = Provider.of<IndexProvider>(context).withdrawAmount;
+
     return Material(
       color: MyColors.bg,
       child: Scaffold(
@@ -381,6 +394,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(left: 20),
                       child: TextFormField(
+                        controller: _depositAmountController,
                         enableInteractiveSelection: false,
                         cursorColor: MyColors.black87,
                         decoration: InputDecoration(
@@ -398,13 +412,18 @@ class _VaultPcPageState extends State<VaultPcPage> {
                         ),
                         //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
                         inputFormatters: [MyNumberTextInputFormatter(digit:6)],
-                        onChanged: (String value) {},
+                        onChanged: (String value) {
+                          if (value != null && value != '') {
+                            Provider.of<IndexProvider>(context, listen: false).changeDepositAmount(value);
+                          } else {
+                            Provider.of<IndexProvider>(context, listen: false).changeDepositAmount('');
+                          }
+                        },
                         onSaved: (String value) {},
                         onEditingComplete: () {},
                       ),
                     ),
-                    shape:
-                        StadiumBorder(side: BorderSide(color: MyColors.white)),
+                    shape: StadiumBorder(side: BorderSide(color: MyColors.white)),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -412,13 +431,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      _rateWidget(context, 25),
+                      _rateWidget(context, 1, 66.6126, 25),
                       SizedBox(width: 25),
-                      _rateWidget(context, 50),
+                      _rateWidget(context, 1, 66.6126, 50),
                       SizedBox(width: 25),
-                      _rateWidget(context, 75),
+                      _rateWidget(context, 1, 66.6126, 75),
                       SizedBox(width: 25),
-                      _rateWidget(context, 100),
+                      _rateWidget(context, 1, 66.6126, 100),
                     ],
                   ),
                 ),
@@ -475,6 +494,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(left: 10),
                       child: TextFormField(
+                        controller: _withdrawAmountController,
                         enableInteractiveSelection: false,
                         cursorColor: MyColors.black87,
                         decoration: InputDecoration(
@@ -492,7 +512,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                         ),
                         //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
                         inputFormatters: [MyNumberTextInputFormatter(digit:6)],
-                        onChanged: (String value) {},
+                        onChanged: (String value) {
+                          if (value != null && value != '') {
+                            Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount(value);
+                          } else {
+                            Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount('');
+                          }
+                        },
                         onSaved: (String value) {},
                         onEditingComplete: () {},
                       ),
@@ -506,13 +532,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      _rateWidget(context, 25),
+                      _rateWidget(context, 2, 20.5600, 25),
                       SizedBox(width: 25),
-                      _rateWidget(context, 50),
+                      _rateWidget(context, 2, 20.5600, 50),
                       SizedBox(width: 25),
-                      _rateWidget(context, 75),
+                      _rateWidget(context, 2, 20.5600, 75),
                       SizedBox(width: 25),
-                      _rateWidget(context, 100),
+                      _rateWidget(context, 2, 20.5600, 100),
                     ],
                   ),
                 ),
@@ -544,7 +570,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _rateWidget(BuildContext context, value) {
+  Widget _rateWidget(BuildContext context, int type, double balance, int rate) {
     return Material(
       color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -553,12 +579,23 @@ class _VaultPcPageState extends State<VaultPcPage> {
         splashColor: Color(0x802196F3),
         highlightColor: Color(0x802196F3),
         onTap: () {
-          print('111');
+          String account = Provider.of<IndexProvider>(context, listen: false).account;
+          double rateDouble = NumUtil.divide(rate, 100);
+          if(account != '') {
+            double value = NumUtil.multiply(balance, rateDouble);
+            setState(() {
+              if (type == 1) {
+                Provider.of<IndexProvider>(context, listen: false).changeDepositAmount(value.toString());
+              } else {
+                Provider.of<IndexProvider>(context, listen: false).changeWithdrawAmount(value.toString());
+              }
+            });
+          }
         },
         child: Container(
           padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
           child: Text(
-            '$value%',
+            '$rate%',
             style: GoogleFonts.lato(
               letterSpacing: 0.5,
               color: Colors.blue[800],
@@ -727,7 +764,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
       tronFlag = js.context.hasProperty('tronWeb');
-      print('_reloadAccount 111 ' + tronFlag.toString());
+      //print('_reloadAccount 111 ' + tronFlag.toString());
       if (tronFlag) {
         var result = js.context["tronWeb"]["defaultAddress"]["base58"];
         if (result.toString() != 'false') {
