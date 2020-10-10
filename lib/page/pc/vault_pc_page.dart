@@ -381,8 +381,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
                 SizedBox(height: 10),
                 Card(
-                  elevation: 2.0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(side: BorderSide(width: 1.5, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(30.0))),
                   child: MaterialButton(
                     color: MyColors.white,
                     disabledColor: MyColors.white,
@@ -480,8 +480,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
                 SizedBox(height: 10),
                 Card(
-                  elevation: 2.0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(side: BorderSide(width: 1.5, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(30.0))),
                   child: MaterialButton(
                     elevation: 3,
                     color: MyColors.white,
@@ -706,6 +706,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           showDialog(
             context: context,
             child: AlertDialog(
+              elevation: 3,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30.0))
               ),
