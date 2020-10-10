@@ -9,7 +9,7 @@ class CommonProvider {
 
   static List<String> _homeList = [
     '机枪池',
-    '挖矿',
+    '兑换交易',
     '连接钱包',
   ];
   static List<String> get homeList => _homeList;

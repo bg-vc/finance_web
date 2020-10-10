@@ -16,12 +16,12 @@ import 'dart:js' as js;
 import 'package:url_launcher/url_launcher.dart';
 
 
-class FarmPcPage extends StatefulWidget {
+class SwapPcPage extends StatefulWidget {
   @override
-  _FarmPcPageState createState() => _FarmPcPageState();
+  _SwapPcPageState createState() => _SwapPcPageState();
 }
 
-class _FarmPcPageState extends State<FarmPcPage> {
+class _SwapPcPageState extends State<SwapPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   bool tronFlag = false;
   Timer _timer;
@@ -183,7 +183,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
               .navigateTo(context, 'vault', transition: TransitionType.fadeIn);
         } else if (index == 1) {
           Application.router
-              .navigateTo(context, 'farm', transition: TransitionType.fadeIn);
+              .navigateTo(context, 'swap', transition: TransitionType.fadeIn);
         } else if (index == 2 && account == '') {
           showDialog(
             context: context,

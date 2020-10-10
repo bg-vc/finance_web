@@ -117,9 +117,10 @@ class _VaultPcPageState extends State<VaultPcPage> {
     return Container(
       child: Column(
         children: <Widget>[
-          SizedBox(height: index == 0 ? 20 : 0),
-          _layoutFlag ? _oneWidget(context, item, index) : (_layoutIndex == index ? _twoWidget(context, item, index) : _oneWidget(context, item, index)),
+          SizedBox(height: index == 0 ? 50 : 0),
+          !_layoutFlag ? _oneWidget(context, item, index) : (_layoutIndex == index ? _twoWidget(context, item, index) : _oneWidget(context, item, index)),
           SizedBox(height: 10),
+          SizedBox(height: index == _vaultRows.length - 1 ? 50 : 0),
         ],
       ),
     );
@@ -139,7 +140,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _topBizWidget(context, item, index),
+                  _topBizWidget(context, item, index, 1),
                 ],
               ),
             ),
@@ -163,7 +164,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _topBizWidget(context, item, index),
+                  _topBizWidget(context, item, index, 2),
                   SizedBox(height: 50),
                   _bottomBizWidget(context, item),
                 ],
@@ -175,12 +176,16 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _topBizWidget(BuildContext context, VaultRows item, int index) {
+  Widget _topBizWidget(BuildContext context, VaultRows item, int index, int type) {
     return InkWell(
       onTap: () {
         setState(() {
           _layoutIndex = index;
-          _layoutFlag = !_layoutFlag;
+          if (type == 1) {
+            _layoutFlag = true;
+          } else {
+            _layoutFlag = false;
+          }
           _depositAmount = '';
           _withdrawAmount = '';
         });
@@ -202,7 +207,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 20),
             Container(
               width: 100,
               child: Column(
@@ -231,6 +236,38 @@ class _VaultPcPageState extends State<VaultPcPage> {
               ),
             ),
             SizedBox(width: 50),
+            InkWell(
+              onTap: () {
+              },
+              child: Container(
+                width: 150,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        '${item.contractAddress.substring(0, 4) +'...' + item.contractAddress.substring(item.contractAddress.length-4)}',
+                        style: GoogleFonts.lato(
+                          fontSize: 20,
+                          color: MyColors.black,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Container(
+                      child: Text(
+                        '合约地址',
+                        style: GoogleFonts.lato(
+                          fontSize: 14,
+                          color: MyColors.grey700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(width: 50),
             Container(
               width: 200,
               child: Column(
@@ -256,39 +293,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            SizedBox(width: 50),
-            InkWell(
-              onTap: () {
-
-              },
-              child: Container(
-                width: 150,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        'TBTj...rDjN',
-                        style: GoogleFonts.lato(
-                          fontSize: 20,
-                          color: MyColors.black,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Container(
-                      child: Text(
-                        '合约地址',
-                        style: GoogleFonts.lato(
-                          fontSize: 14,
-                          color: MyColors.grey700,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
             SizedBox(width: 50),
@@ -356,7 +360,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   onTap: () {
                     setState(() {
                       _layoutIndex = index;
-                      _layoutFlag = !_layoutFlag;
+                      if (type == 1) {
+                        _layoutFlag = true;
+                      } else {
+                        _layoutFlag = false;
+                      }
                     });
                   },
                   child: Container(
@@ -723,7 +731,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         if (index == 0) {
           Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
         } else if (index == 1) {
-          Application.router.navigateTo(context, 'farm', transition: TransitionType.fadeIn);
+          Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
         } else if (index == 2 && account == '') {
           showDialog(
             context: context,

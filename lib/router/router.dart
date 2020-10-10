@@ -14,7 +14,7 @@ class Routes {
     });
 
     router.define('/vault', handler: vaultPcHandler);
-    router.define('/farm', handler: farmPcHandler);
+    router.define('/swap', handler: farmPcHandler);
 
   }
 }
