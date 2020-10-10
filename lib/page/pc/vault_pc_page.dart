@@ -132,7 +132,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 1200,
+            width: 1000,
             height: 120,
             child: Card(
               elevation: 3,
@@ -156,7 +156,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 1200,
+            width: 1000,
             height: 360,
             child: Card(
               elevation: 3,
@@ -192,7 +192,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
       },
       child: Container(
         color: MyColors.white,
-        width: 1200,
+        width: 1000,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -233,38 +233,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            SizedBox(width: 50),
-            InkWell(
-              onTap: () {
-              },
-              child: Container(
-                width: 150,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        '${item.contractAddress.substring(0, 4) +'...' + item.contractAddress.substring(item.contractAddress.length-4)}',
-                        style: GoogleFonts.lato(
-                          fontSize: 20,
-                          color: MyColors.black,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Container(
-                      child: Text(
-                        '合约地址',
-                        style: GoogleFonts.lato(
-                          fontSize: 14,
-                          color: MyColors.grey700,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
             SizedBox(width: 50),
@@ -391,12 +359,12 @@ class _VaultPcPageState extends State<VaultPcPage> {
 
   Widget _bottomBizWidget(BuildContext context, VaultRows item) {
     return Container(
-      width: 1200,
+      width: 1000,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 500,
+            width: 400,
             child: Column(
               children: <Widget>[
                 Container(
@@ -495,7 +463,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           ),
           SizedBox(width: 60),
           Container(
-            width: 500,
+            width: 400,
             child: Column(
               children: <Widget>[
                 Container(
@@ -692,7 +660,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
               color: MyColors.white,
               child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(left: 30, right: 30),
+                padding: EdgeInsets.only(left: 20, right: 20),
                 child: Text(
                   '${_homeList[index]}',
                   style: GoogleFonts.lato(
