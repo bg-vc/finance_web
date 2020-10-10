@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:common_utils/common_utils.dart';
 import 'package:finance_web/common/color.dart';
 import 'package:finance_web/config/service_config.dart';
+import 'package:finance_web/model/vault_model.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
@@ -25,6 +26,7 @@ class VaultPcPage extends StatefulWidget {
 
 class _VaultPcPageState extends State<VaultPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _layoutIndex = -1;
   bool _layoutFlag = false;
   bool tronFlag = false;
   Timer _timer;
@@ -44,6 +46,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
       });
     }
     _reloadAccount();
+    _getVaultData();
   }
 
   @override
@@ -99,16 +102,30 @@ class _VaultPcPageState extends State<VaultPcPage> {
   Widget _bodyWidget(BuildContext context) {
     return Container(
       color: MyColors.white,
-      child: ListView(
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: _vaultRows.length,
+        itemBuilder: (context, index) {
+          return _bizWidget(context, _vaultRows[index], index);
+        },
+      ),
+    );
+  }
+
+  Widget _bizWidget(BuildContext context, VaultRows item, int index) {
+    return Container(
+      child: Column(
         children: <Widget>[
-          SizedBox(height: 50),
-          !_layoutFlag ? _oneWidget(context) : _twoWidget(context),
+          SizedBox(height: index == 0 ? 20 : 0),
+          _layoutFlag ? _oneWidget(context, item, index) : (_layoutIndex == index ? _twoWidget(context, item, index) : _oneWidget(context, item, index)),
+          SizedBox(height: 10),
         ],
       ),
     );
   }
 
-  Widget _oneWidget(BuildContext context) {
+  Widget _oneWidget(BuildContext context, VaultRows item, int index) {
     return InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +139,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _topBizWidget(context),
+                  _topBizWidget(context, item, index),
                 ],
               ),
             ),
@@ -132,10 +149,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _twoWidget(BuildContext context) {
+  Widget _twoWidget(BuildContext context, VaultRows item, int index) {
     return InkWell(
-      onTap: () {
-      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -148,9 +163,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _topBizWidget(context),
+                  _topBizWidget(context, item, index),
                   SizedBox(height: 50),
-                  _bottomBizWidget(context),
+                  _bottomBizWidget(context, item),
                 ],
               ),
             ),
@@ -160,10 +175,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _topBizWidget(BuildContext context) {
+  Widget _topBizWidget(BuildContext context, VaultRows item, int index) {
     return InkWell(
       onTap: () {
         setState(() {
+          _layoutIndex = index;
           _layoutFlag = !_layoutFlag;
           _depositAmount = '';
           _withdrawAmount = '';
@@ -179,21 +195,22 @@ class _VaultPcPageState extends State<VaultPcPage> {
               padding: EdgeInsets.only(left: 10),
               child: ClipOval(
                 child: Image.asset(
-                  'images/usdt.png',
+                  '${item.pic1}',
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(width: 30),
+            SizedBox(width: 10),
             Container(
+              width: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     child: Text(
-                      'USDT',
+                      '${item.depositTokenName}',
                       style: GoogleFonts.lato(
                         fontSize: 20,
                         color: MyColors.black,
@@ -203,7 +220,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   SizedBox(height: 8),
                   Container(
                     child: Text(
-                      'USDT',
+                      '${item.depositTokenName}',
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         color: MyColors.grey700,
@@ -213,14 +230,15 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ],
               ),
             ),
-            SizedBox(width: 100),
+            SizedBox(width: 50),
             Container(
+              width: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     child: Text(
-                      '66.6126 USDT',
+                      '66.6126 ${item.depositTokenName}',
                       style: GoogleFonts.lato(
                         fontSize: 20,
                         color: MyColors.black,
@@ -240,12 +258,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ],
               ),
             ),
-            SizedBox(width: 100),
+            SizedBox(width: 50),
             InkWell(
               onTap: () {
 
               },
               child: Container(
+                width: 150,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -272,14 +291,15 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
               ),
             ),
-            SizedBox(width: 100),
+            SizedBox(width: 50),
             Container(
+              width: 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     child: Text(
-                      '20.5600 USDT',
+                      '20.5600 ${item.depositTokenName}',
                       style: GoogleFonts.lato(
                         fontSize: 20,
                         color: MyColors.black,
@@ -299,14 +319,15 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ],
               ),
             ),
-            SizedBox(width: 100),
+            SizedBox(width: 50),
             Container(
+              width: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     child: Text(
-                      '11.68%',
+                      '${item.apy * 100}%',
                       style: GoogleFonts.lato(
                         fontSize: 20,
                         color: MyColors.black,
@@ -326,7 +347,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ],
               ),
             ),
-            SizedBox(width: 100),
+            SizedBox(width: 50),
             Container(
               child: Card(
                 elevation: 2,
@@ -334,6 +355,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 child: InkWell(
                   onTap: () {
                     setState(() {
+                      _layoutIndex = index;
                       _layoutFlag = !_layoutFlag;
                     });
                   },
@@ -345,7 +367,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     child: Icon(
                       !_layoutFlag
                           ? CupertinoIcons.down_arrow
-                          : CupertinoIcons.up_arrow,
+                          : (_layoutIndex == index ? CupertinoIcons.up_arrow : CupertinoIcons.down_arrow),
                       size: 23,
                       color: MyColors.white,
                     ),
@@ -359,7 +381,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _bottomBizWidget(BuildContext context) {
+  Widget _bottomBizWidget(BuildContext context, VaultRows item) {
     return Container(
       width: 1200,
       child: Row(
@@ -372,7 +394,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    '余额: 66.6126 USDT',
+                    '余额: 66.6126 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -471,7 +493,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    '20.5600 USDT',
+                    '20.5600 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -776,5 +798,85 @@ class _VaultPcPageState extends State<VaultPcPage> {
         Provider.of<IndexProvider>(context, listen: false).changeAccount('');
       }
     });
+  }
+
+  List<VaultRows> _vaultRows;
+
+  _getVaultData() async {
+    _vaultRows = List<VaultRows>();
+    _vaultRows.add(VaultRows(
+        id: 0,
+        mineType: 1,
+        depositTokenName: 'USDT',
+        depositTokenType: 2,
+        pic1: 'images/usdt.png',
+        pic2: 'images/usdt.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.1234));
+    _vaultRows.add(VaultRows(
+        id: 1,
+        mineType: 1,
+        depositTokenName: 'TRX',
+        depositTokenType: 1,
+        pic1: 'images/trx.png',
+        pic2: 'images/trx.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.2411));
+    _vaultRows.add(VaultRows(
+        id: 2,
+        mineType: 1,
+        depositTokenName: 'USDJ',
+        depositTokenType: 2,
+        pic1: 'images/usdj.png',
+        pic2: 'images/usdj.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.3611));
+    _vaultRows.add(VaultRows(
+        id: 3,
+        mineType: 1,
+        depositTokenName: 'SUN',
+        depositTokenType: 2,
+        pic1: 'images/sun.png',
+        pic2: 'images/sun.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.7956));
+    _vaultRows.add(VaultRows(
+        id: 4,
+        mineType: 1,
+        depositTokenName: 'JST',
+        depositTokenType: 2,
+        pic1: 'images/jst.png',
+        pic2: 'images/jst.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.5632));
+    _vaultRows.add(VaultRows(
+        id: 5,
+        mineType: 1,
+        depositTokenName: 'WBTT',
+        depositTokenType: 2,
+        pic1: 'images/wbtt.png',
+        pic2: 'images/wbtt.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.6512));
+
+    _vaultRows.add(VaultRows(
+        id: 4,
+        mineType: 1,
+        depositTokenName: 'JST',
+        depositTokenType: 2,
+        pic1: 'images/jst.png',
+        pic2: 'images/jst.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.5632));
+    _vaultRows.add(VaultRows(
+        id: 5,
+        mineType: 1,
+        depositTokenName: 'WBTT',
+        depositTokenType: 2,
+        pic1: 'images/wbtt.png',
+        pic2: 'images/wbtt.png',
+        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
+        apy: 0.6512));
+    setState(() {});
   }
 }
