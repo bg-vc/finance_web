@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:common_utils/common_utils.dart';
 import 'package:finance_web/common/color.dart';
 import 'package:finance_web/config/service_config.dart';
+import 'package:finance_web/model/asset_model.dart';
 import 'package:finance_web/model/vault_model.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
@@ -36,6 +37,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
   TextEditingController _depositAmountController;
   TextEditingController _withdrawAmountController;
 
+  int _selectAssetFilterIndex = 0;
+
 
   @override
   void initState() {
@@ -47,6 +50,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     }
     _reloadAccount();
     _getVaultData();
+    _getAssetData();
   }
 
   @override
@@ -165,7 +169,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   _topBizWidget(context, item, index, 2),
-                  SizedBox(height: 50),
+                  SizedBox(height: 40),
                   _bottomBizWidget(context, item),
                 ],
               ),
@@ -280,7 +284,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   SizedBox(height: 8),
                   Container(
                     child: Text(
-                      '已存入',
+                      '已存',
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         color: MyColors.grey700,
@@ -438,7 +442,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 InkWell(
                   onTap: () {},
                   child: Container(
@@ -469,7 +473,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    '已存入:   20.5600 ${item.depositTokenName}',
+                    '已存:   20.5600 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -537,7 +541,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 InkWell(
                   onTap: () {},
                   child: Container(
@@ -567,16 +571,47 @@ class _VaultPcPageState extends State<VaultPcPage> {
             child: Column(
               children: <Widget>[
                 Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    '20.5600 ${item.depositTokenName}',
-                    style: GoogleFonts.lato(
-                      fontSize: 15,
-                      color: MyColors.grey700,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 70,
+                        padding: EdgeInsets.only(top: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                          color: MyColors.blue500,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: InkWell(
+                          onTap: (){
+                            _showAssetFilterDialLog();
+                          },
+                          child: Container(
+                            width: 70,
+                            alignment: Alignment.center,
+                            child: Text(
+                              '${_assetModels[_selectAssetFilterIndex].tokenName}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Container(
+                        child: Text(
+                          '20.5600 ${_assetModels[_selectAssetFilterIndex].tokenName}',
+                          style: GoogleFonts.lato(
+                            fontSize: 15,
+                            color: MyColors.grey700,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 3),
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(side: BorderSide(width: 1.5, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(30.0))),
@@ -637,7 +672,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 InkWell(
                   onTap: () {},
                   child: Container(
@@ -800,64 +835,142 @@ class _VaultPcPageState extends State<VaultPcPage> {
         } else if (index == 1) {
           Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
         } else if (index == 2 && account == '') {
-          showDialog(
-            context: context,
-            child: AlertDialog(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0))
-              ),
-              content: Container(
-                width: 300,
-                height: 150,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Color(0xFFFFFF),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          '请使用TronLink钱包登录',
-                          style: GoogleFonts.lato(
-                            fontSize: 18.0,
-                            letterSpacing: 0.2,
-                            color: MyColors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      InkWell(
-                          onTap: () {
-                            launch(tronLinkChrome).catchError((error) {
-                              print('launch error:$error');
-                            });
-                          },
-                          child: Container(
-                            child: Text(
-                              '还没安装TronLink？ 请点击此处>>',
-                              style: GoogleFonts.lato(
-                                fontSize: 15.0,
-                                letterSpacing: 0.2,
-                                color: MyColors.black87,
-                                //decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
+          _showConnectWalletDialLog();
         }
       },
     );
   }
+
+  _showConnectWalletDialLog() {
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30.0))
+        ),
+        content: Container(
+          width: 300,
+          height: 150,
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Color(0xFFFFFF),
+            borderRadius: BorderRadius.all(Radius.circular(32.0)),
+          ),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    '请使用TronLink钱包登录',
+                    style: GoogleFonts.lato(
+                      fontSize: 18.0,
+                      letterSpacing: 0.2,
+                      color: MyColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                InkWell(
+                    onTap: () {
+                      launch(tronLinkChrome).catchError((error) {
+                        print('launch error:$error');
+                      });
+                    },
+                    child: Container(
+                      child: Text(
+                        '还没安装TronLink？ 请点击此处>>',
+                        style: GoogleFonts.lato(
+                          fontSize: 15.0,
+                          letterSpacing: 0.2,
+                          color: MyColors.black87,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _showAssetFilterDialLog() {
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))
+        ),
+        content: Container(
+          width: 300,
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Color(0xFFFFFF),
+            borderRadius: BorderRadius.all(Radius.circular(32.0)),
+          ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: _assetModels.length,
+            itemBuilder: (context, index) {
+              return _itemWidget(context, index, _assetModels[index]);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _itemWidget(BuildContext context, int index, AssetModel item) {
+    bool flag = index == _selectAssetFilterIndex ? true : false;
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _selectAssetFilterIndex = index;
+          Navigator.pop(context);
+        });
+      },
+      child: Container(
+        width: 300,
+        //color: MyColors.white,
+        padding: EdgeInsets.only(top: 6, bottom: 6),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: 200,
+              padding: EdgeInsets.fromLTRB(10, 6, 0, 0),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${item.tokenName}',
+                style: TextStyle(
+                  color: !flag ? Colors.black87 : Colors.blue[800],
+                  fontSize: 15,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Container(
+              width: 100,
+              padding: EdgeInsets.fromLTRB(0, 6, 10, 0),
+              alignment: Alignment.centerRight,
+              child: !flag ? Container() : Icon(
+                Icons.check,
+                color: Colors.blue[800],
+                size: 20,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
@@ -953,5 +1066,12 @@ class _VaultPcPageState extends State<VaultPcPage> {
         contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
         apy: 0.6512));
     setState(() {});
+  }
+
+  List<AssetModel> _assetModels = List<AssetModel>();
+  _getAssetData() {
+    _assetModels.add(AssetModel(id: 0, tokenName: 'SUN', tokenType: 2, precision: 18, tokenAddress: ''));
+    _assetModels.add(AssetModel(id: 1, tokenName: 'TRX', tokenType: 1, precision: 6, tokenAddress: ''));
+    _assetModels.add(AssetModel(id: 2, tokenName: 'USDT', tokenType: 2, precision: 6, tokenAddress: ''));
   }
 }
