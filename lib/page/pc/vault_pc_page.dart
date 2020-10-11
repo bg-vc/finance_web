@@ -917,7 +917,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             scrollDirection: Axis.vertical,
             itemCount: _assetModels.length,
             itemBuilder: (context, index) {
-              return _itemWidget(context, index, _assetModels[index]);
+              return _selectAssetItemWidget(context, index, _assetModels[index]);
             },
           ),
         ),
@@ -925,7 +925,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  Widget _itemWidget(BuildContext context, int index, AssetModel item) {
+  Widget _selectAssetItemWidget(BuildContext context, int index, AssetModel item) {
     bool flag = index == _selectAssetFilterIndex ? true : false;
     return InkWell(
       onTap: () {
@@ -943,7 +943,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           children: <Widget>[
             Container(
               width: 200,
-              padding: EdgeInsets.fromLTRB(10, 6, 0, 0),
+              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
               alignment: Alignment.centerLeft,
               child: Text(
                 '${item.tokenName}',
@@ -957,7 +957,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             ),
             Container(
               width: 100,
-              padding: EdgeInsets.fromLTRB(0, 6, 10, 0),
+              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               alignment: Alignment.centerRight,
               child: !flag ? Container() : Icon(
                 Icons.check,
