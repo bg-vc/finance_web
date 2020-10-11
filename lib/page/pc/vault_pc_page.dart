@@ -197,7 +197,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 10),
               child: ClipOval(
                 child: Image.asset(
                   '${item.pic1}',
@@ -207,7 +206,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
               ),
             ),
-            SizedBox(width: 20),
+            SizedBox(width: 50),
             Container(
               width: 100,
               child: Column(
@@ -364,13 +363,14 @@ class _VaultPcPageState extends State<VaultPcPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 400,
+            width: 300,
             child: Column(
               children: <Widget>[
                 Container(
+                  width: 300,
                   alignment: Alignment.center,
                   child: Text(
-                    '余额: 66.6126 ${item.depositTokenName}',
+                    '余额:   66.6126 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -385,7 +385,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     color: MyColors.white,
                     disabledColor: MyColors.white,
                     child: Container(
-                      width: 500,
+                      width: 300,
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(left: 20),
                       child: TextFormField(
@@ -424,15 +424,16 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 ),
                 SizedBox(height: 10),
                 Container(
+                  width: 300,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       _rateWidget(context, 1, 66.6126, 25),
-                      SizedBox(width: 25),
+                      SizedBox(width: 5),
                       _rateWidget(context, 1, 66.6126, 50),
-                      SizedBox(width: 25),
+                      SizedBox(width: 5),
                       _rateWidget(context, 1, 66.6126, 75),
-                      SizedBox(width: 25),
+                      SizedBox(width: 5),
                       _rateWidget(context, 1, 66.6126, 100),
                     ],
                   ),
@@ -444,8 +445,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     color: MyColors.white,
                     child: Chip(
                       elevation: 2,
-                      padding: EdgeInsets.only(
-                          left: 50, top: 15, bottom: 15, right: 50),
+                      padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
                         '存入',
@@ -461,15 +461,15 @@ class _VaultPcPageState extends State<VaultPcPage> {
               ],
             ),
           ),
-          SizedBox(width: 60),
+          SizedBox(width: 15),
           Container(
-            width: 400,
+            width: 300,
             child: Column(
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    '20.5600 ${item.depositTokenName}',
+                    '已存入:   20.5600 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -485,9 +485,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                     color: MyColors.white,
                     disabledColor: MyColors.white,
                     child: Container(
-                      width: 500,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(left: 20),
                       child: TextFormField(
                         controller: _withdrawAmountController,
                         enableInteractiveSelection: false,
@@ -519,21 +518,21 @@ class _VaultPcPageState extends State<VaultPcPage> {
                         onEditingComplete: () {},
                       ),
                     ),
-                    shape:
-                        StadiumBorder(side: BorderSide(color: MyColors.white)),
+                    shape: StadiumBorder(side: BorderSide(color: MyColors.white)),
                   ),
                 ),
                 SizedBox(height: 10),
                 Container(
+                  width: 300,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       _rateWidget(context, 2, 20.5600, 25),
-                      SizedBox(width: 25),
+                      SizedBox(width: 0),
                       _rateWidget(context, 2, 20.5600, 50),
-                      SizedBox(width: 25),
+                      SizedBox(width: 0),
                       _rateWidget(context, 2, 20.5600, 75),
-                      SizedBox(width: 25),
+                      SizedBox(width: 0),
                       _rateWidget(context, 2, 20.5600, 100),
                     ],
                   ),
@@ -550,6 +549,106 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       backgroundColor: MyColors.blue500,
                       label: Text(
                         '赎回',
+                        style: GoogleFonts.lato(
+                          letterSpacing: 0.5,
+                          color: MyColors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 15),
+          Container(
+            width: 300,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '20.5600 ${item.depositTokenName}',
+                    style: GoogleFonts.lato(
+                      fontSize: 15,
+                      color: MyColors.grey700,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(side: BorderSide(width: 1.5, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                  child: MaterialButton(
+                    elevation: 3,
+                    color: MyColors.white,
+                    disabledColor: MyColors.white,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(left: 20),
+                      child: TextFormField(
+                        controller: _withdrawAmountController,
+                        enableInteractiveSelection: false,
+                        cursorColor: MyColors.black87,
+                        decoration: InputDecoration(
+                          hintText: '',
+                          hintStyle: GoogleFonts.lato(
+                            color: Colors.grey[500],
+                            fontSize: 16,
+                            letterSpacing: 0.5,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: GoogleFonts.lato(
+                          color: MyColors.black87,
+                          fontSize: 16,
+                        ),
+                        //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
+                        inputFormatters: [MyNumberTextInputFormatter(digit:6)],
+                        onChanged: (String value) {
+                          if (value != null && value != '') {
+                            _withdrawAmount = value;
+                          } else {
+                            _withdrawAmount = '';
+                          }
+                          setState(() {});
+                        },
+                        onSaved: (String value) {},
+                        onEditingComplete: () {},
+                      ),
+                    ),
+                    shape: StadiumBorder(side: BorderSide(color: MyColors.white)),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: 300,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      _rateWidget(context, 2, 20.5600, 25),
+                      SizedBox(width: 0),
+                      _rateWidget(context, 2, 20.5600, 50),
+                      SizedBox(width: 0),
+                      _rateWidget(context, 2, 20.5600, 75),
+                      SizedBox(width: 0),
+                      _rateWidget(context, 2, 20.5600, 100),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    color: MyColors.white,
+                    child: Chip(
+                      elevation: 2,
+                      padding: EdgeInsets.only(
+                          left: 50, top: 15, bottom: 15, right: 50),
+                      backgroundColor: MyColors.blue500,
+                      label: Text(
+                        '收获',
                         style: GoogleFonts.lato(
                           letterSpacing: 0.5,
                           color: MyColors.white,
@@ -590,7 +689,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
           }
         },
         child: Container(
-          padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
+          padding: EdgeInsets.only(left: 15, top: 8, bottom: 8, right: 15),
           child: Text(
             '$rate%',
             style: GoogleFonts.lato(
