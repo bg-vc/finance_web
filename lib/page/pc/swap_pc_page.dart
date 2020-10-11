@@ -143,7 +143,7 @@ class _SwapPcPageState extends State<SwapPcPage> {
           color: MyColors.white,
           child: Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 30, right: 30),
+            padding: EdgeInsets.only(left: 20, right: 20),
             child: Text(
               '${_homeList[index]}',
               style: GoogleFonts.lato(
