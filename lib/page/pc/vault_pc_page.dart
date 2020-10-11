@@ -35,9 +35,11 @@ class _VaultPcPageState extends State<VaultPcPage> {
   Timer _timer;
   String _depositAmount = '';
   String _withdrawAmount = '';
+  String _harvestAmount = '';
 
   TextEditingController _depositAmountController;
   TextEditingController _withdrawAmountController;
+  TextEditingController _harvestAmountController;
 
   int _selectAssetFilterIndex = 0;
 
@@ -71,6 +73,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _depositAmount.length))));
     _withdrawAmountController =  TextEditingController.fromValue(TextEditingValue(text: _withdrawAmount,
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _withdrawAmount.length))));
+    _harvestAmountController =  TextEditingController.fromValue(TextEditingValue(text: _harvestAmount,
+        selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _harvestAmount.length))));
 
     return Material(
       color: MyColors.white,
@@ -257,7 +261,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   SizedBox(height: 8),
                   Container(
                     child: Text(
-                      '余额',
+                      '${S.of(context).vaultBalance}',
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         color: MyColors.grey700,
@@ -285,7 +289,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   SizedBox(height: 8),
                   Container(
                     child: Text(
-                      '已存',
+                      '${S.of(context).vaultDeposited}',
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         color: MyColors.grey700,
@@ -313,7 +317,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   SizedBox(height: 8),
                   Container(
                     child: Text(
-                      '回报率',
+                      '${S.of(context).vaultApy}',
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         color: MyColors.grey700,
@@ -375,7 +379,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   width: 300,
                   alignment: Alignment.center,
                   child: Text(
-                    '余额:   66.6126 ${item.depositTokenName}',
+                    '${S.of(context).vaultBalance}:   66.6126 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -453,7 +457,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
-                        '存入',
+                        '${S.of(context).vaultDeposit}',
                         style: GoogleFonts.lato(
                           letterSpacing: 0.5,
                           color: MyColors.white,
@@ -474,7 +478,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    '已存:   20.5600 ${item.depositTokenName}',
+                    '${S.of(context).vaultDeposited}:   20.5600 ${item.depositTokenName}',
                     style: GoogleFonts.lato(
                       fontSize: 15,
                       color: MyColors.grey700,
@@ -553,7 +557,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                           left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
-                        '赎回',
+                        '${S.of(context).vaultWithdraw}',
                         style: GoogleFonts.lato(
                           letterSpacing: 0.5,
                           color: MyColors.white,
@@ -623,7 +627,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(left: 20),
                       child: TextFormField(
-                        controller: _withdrawAmountController,
+                        controller: _harvestAmountController,
                         enableInteractiveSelection: false,
                         cursorColor: MyColors.black87,
                         decoration: InputDecoration(
@@ -643,9 +647,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
                         inputFormatters: [MyNumberTextInputFormatter(digit:6)],
                         onChanged: (String value) {
                           if (value != null && value != '') {
-                            _withdrawAmount = value;
+                            _harvestAmount = value;
                           } else {
-                            _withdrawAmount = '';
+                            _harvestAmount = '';
                           }
                           setState(() {});
                         },
@@ -662,13 +666,13 @@ class _VaultPcPageState extends State<VaultPcPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      _rateWidget(context, 2, 20.5600, 25),
+                      _rateWidget(context, 3, 20.5600, 25),
                       SizedBox(width: 0),
-                      _rateWidget(context, 2, 20.5600, 50),
+                      _rateWidget(context, 3, 20.5600, 50),
                       SizedBox(width: 0),
-                      _rateWidget(context, 2, 20.5600, 75),
+                      _rateWidget(context, 3, 20.5600, 75),
                       SizedBox(width: 0),
-                      _rateWidget(context, 2, 20.5600, 100),
+                      _rateWidget(context, 3, 20.5600, 100),
                     ],
                   ),
                 ),
@@ -683,7 +687,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
                           left: 50, top: 15, bottom: 15, right: 50),
                       backgroundColor: MyColors.blue500,
                       label: Text(
-                        '收获',
+                        '${S.of(context).vaultHarvest}',
                         style: GoogleFonts.lato(
                           letterSpacing: 0.5,
                           color: MyColors.white,
@@ -717,8 +721,10 @@ class _VaultPcPageState extends State<VaultPcPage> {
             setState(() {
               if (type == 1) {
                 _depositAmount = value.toString();
-              } else {
+              } else if (type == 2) {
                 _withdrawAmount = value.toString();
+              } else if (type == 3) {
+                _harvestAmount = value.toString();
               }
             });
           }

@@ -24,6 +24,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "actionTitle0" : MessageLookupByLibrary.simpleMessage("Vault"),
     "actionTitle1" : MessageLookupByLibrary.simpleMessage("Swap"),
     "actionTitle2" : MessageLookupByLibrary.simpleMessage("About"),
-    "actionTitle3" : MessageLookupByLibrary.simpleMessage("Connect Wallet")
+    "actionTitle3" : MessageLookupByLibrary.simpleMessage("Connect Wallet"),
+    "vaultApy" : MessageLookupByLibrary.simpleMessage("APY"),
+    "vaultBalance" : MessageLookupByLibrary.simpleMessage("Balance"),
+    "vaultDeposit" : MessageLookupByLibrary.simpleMessage("Deposit"),
+    "vaultDeposited" : MessageLookupByLibrary.simpleMessage("Deposited"),
+    "vaultHarvest" : MessageLookupByLibrary.simpleMessage("Harvest"),
+    "vaultWithdraw" : MessageLookupByLibrary.simpleMessage("Withdraw")
   };
 }

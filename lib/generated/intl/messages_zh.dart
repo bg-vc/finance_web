@@ -24,6 +24,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "actionTitle0" : MessageLookupByLibrary.simpleMessage("机枪池"),
     "actionTitle1" : MessageLookupByLibrary.simpleMessage("交易"),
     "actionTitle2" : MessageLookupByLibrary.simpleMessage("关于"),
-    "actionTitle3" : MessageLookupByLibrary.simpleMessage("连接钱包")
+    "actionTitle3" : MessageLookupByLibrary.simpleMessage("连接钱包"),
+    "vaultApy" : MessageLookupByLibrary.simpleMessage("回报"),
+    "vaultBalance" : MessageLookupByLibrary.simpleMessage("余额"),
+    "vaultDeposit" : MessageLookupByLibrary.simpleMessage("存入"),
+    "vaultDeposited" : MessageLookupByLibrary.simpleMessage("已存"),
+    "vaultHarvest" : MessageLookupByLibrary.simpleMessage("收获"),
+    "vaultWithdraw" : MessageLookupByLibrary.simpleMessage("赎回")
   };
 }

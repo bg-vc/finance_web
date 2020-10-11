@@ -72,6 +72,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Balance`
+  String get vaultBalance {
+    return Intl.message(
+      'Balance',
+      name: 'vaultBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposited`
+  String get vaultDeposited {
+    return Intl.message(
+      'Deposited',
+      name: 'vaultDeposited',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `APY`
+  String get vaultApy {
+    return Intl.message(
+      'APY',
+      name: 'vaultApy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get vaultDeposit {
+    return Intl.message(
+      'Deposit',
+      name: 'vaultDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw`
+  String get vaultWithdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'vaultWithdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Harvest`
+  String get vaultHarvest {
+    return Intl.message(
+      'Harvest',
+      name: 'vaultHarvest',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

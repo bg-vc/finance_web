@@ -2,5 +2,12 @@
   "actionTitle0": "机枪池",
   "actionTitle1": "交易",
   "actionTitle2": "关于",
-  "actionTitle3": "连接钱包"
+  "actionTitle3": "连接钱包",
+
+  "vaultBalance": "余额",
+  "vaultDeposited": "已存",
+  "vaultApy": "回报",
+  "vaultDeposit": "存入",
+  "vaultWithdraw": "赎回",
+  "vaultHarvest": "收获"
 }
