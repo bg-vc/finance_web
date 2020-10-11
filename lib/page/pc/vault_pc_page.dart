@@ -862,7 +862,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         } else if (index == 1) {
           Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
         } else if (index == 2) {
-          Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
+          Application.router.navigateTo(context, 'about', transition: TransitionType.fadeIn);
         } else if (index == 3 && account == '') {
           _showConnectWalletDialLog();
         } else if (index == 4) {
@@ -929,80 +929,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
     );
   }
 
-  _showAssetFilterDialLog() {
-    showDialog(
-      context: context,
-      child: AlertDialog(
-        elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))
-        ),
-        content: Container(
-          width: 300,
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Color(0xFFFFFF),
-            borderRadius: BorderRadius.all(Radius.circular(32.0)),
-          ),
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemCount: _assetModels.length,
-            itemBuilder: (context, index) {
-              return _selectAssetItemWidget(context, index, _assetModels[index]);
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-
-  Widget _selectAssetItemWidget(BuildContext context, int index, AssetModel item) {
-    bool flag = index == _selectAssetFilterIndex ? true : false;
-    return InkWell(
-      onTap: () {
-        setState(() {
-          _selectAssetFilterIndex = index;
-          Navigator.pop(context);
-        });
-      },
-      child: Container(
-        width: 300,
-        //color: MyColors.white,
-        padding: EdgeInsets.only(top: 6, bottom: 6),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: 200,
-              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '${item.tokenName}',
-                style: TextStyle(
-                  color: !flag ? Colors.black87 : Colors.blue[800],
-                  fontSize: 15,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              width: 100,
-              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-              alignment: Alignment.centerRight,
-              child: !flag ? Container() : Icon(
-                Icons.check,
-                color: Colors.blue[800],
-                size: 20,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   _showLangTypeDialLog() {
     List<LangModel> langModels = Provider.of<IndexProvider>(context, listen: false).langModels;
     showDialog(
@@ -1030,6 +956,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
       ),
     );
   }
+
   Widget _selectLangTypeItemWidget(BuildContext context, int index, LangModel item) {
     int langType = Provider.of<IndexProvider>(context, listen: false).langType;
     bool flag = index == langType ? true : false;
@@ -1056,6 +983,79 @@ class _VaultPcPageState extends State<VaultPcPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 '${item.name}',
+                style: TextStyle(
+                  color: !flag ? Colors.black87 : Colors.blue[800],
+                  fontSize: 15,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Container(
+              width: 100,
+              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              alignment: Alignment.centerRight,
+              child: !flag ? Container() : Icon(
+                Icons.check,
+                color: Colors.blue[800],
+                size: 20,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _showAssetFilterDialLog() {
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))
+        ),
+        content: Container(
+          width: 300,
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Color(0xFFFFFF),
+            borderRadius: BorderRadius.all(Radius.circular(32.0)),
+          ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: _assetModels.length,
+            itemBuilder: (context, index) {
+              return _selectAssetItemWidget(context, index, _assetModels[index]);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _selectAssetItemWidget(BuildContext context, int index, AssetModel item) {
+    bool flag = index == _selectAssetFilterIndex ? true : false;
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _selectAssetFilterIndex = index;
+          Navigator.pop(context);
+        });
+      },
+      child: Container(
+        width: 300,
+        //color: MyColors.white,
+        padding: EdgeInsets.only(top: 6, bottom: 6),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: 200,
+              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${item.tokenName}',
                 style: TextStyle(
                   color: !flag ? Colors.black87 : Colors.blue[800],
                   fontSize: 15,

@@ -18,23 +18,23 @@ import 'dart:js' as js;
 import 'package:url_launcher/url_launcher.dart';
 
 
-class SwapPcPage extends StatefulWidget {
+class AboutPcPage extends StatefulWidget {
   @override
-  _SwapPcPageState createState() => _SwapPcPageState();
+  _AboutPcPageState createState() => _AboutPcPageState();
 }
 
-class _SwapPcPageState extends State<SwapPcPage> {
+class _AboutPcPageState extends State<AboutPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   bool tronFlag = false;
   Timer _timer;
 
   @override
   void initState() {
-    print('SwapPcPage 000');
+    print('AboutPcPage 000');
     super.initState();
     if (mounted) {
       setState(() {
-        CommonProvider.changeHomeIndex(1);
+        CommonProvider.changeHomeIndex(2);
       });
     }
     _reloadAccount();
@@ -80,7 +80,7 @@ class _SwapPcPageState extends State<SwapPcPage> {
           Expanded(
             child: Container(
               child: Center(
-                child: Text('Swap of Flash Finance'),
+                child: Text('About of Flash Finance'),
               ),
             ),
           ),

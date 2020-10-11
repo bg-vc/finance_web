@@ -1,3 +1,4 @@
+import 'package:finance_web/page/pc/about_pc_page.dart';
 import 'package:finance_web/page/pc/swap_pc_page.dart';
 import 'package:finance_web/page/pc/vault_pc_page.dart';
 import 'package:finance_web/page/wap/swap_wap_page.dart';
@@ -14,6 +15,12 @@ Handler swapPcHandler =
 Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return SwapPcPage();
 });
+
+Handler aboutPcHandler =
+Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return AboutPcPage();
+});
+
 
 Handler vaultWapHandler =
 Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
