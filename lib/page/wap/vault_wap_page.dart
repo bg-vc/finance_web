@@ -110,10 +110,10 @@ class _VaultWapPageState extends State<VaultWapPage> {
     return Container(
       child: Column(
         children: <Widget>[
-          SizedBox(height: index == 0 ? ScreenUtil().setHeight(50) : ScreenUtil().setHeight(0)),
+          SizedBox(height: index == 0 ? ScreenUtil().setHeight(30) : ScreenUtil().setHeight(0)),
           !_layoutFlag ? _oneWidget(context, item, index) : (_layoutIndex == index ? _twoWidget(context, item, index) : _oneWidget(context, item, index)),
           SizedBox(height: ScreenUtil().setHeight(10)),
-          SizedBox(height: index == _vaultRows.length - 1 ? ScreenUtil().setHeight(50) : ScreenUtil().setHeight(0)),
+          SizedBox(height: index == _vaultRows.length - 1 ? ScreenUtil().setHeight(30) : ScreenUtil().setHeight(0)),
         ],
       ),
     );
@@ -125,11 +125,11 @@ class _VaultWapPageState extends State<VaultWapPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: ScreenUtil().setWidth(750),
-            height: ScreenUtil().setHeight(120),
+            width: ScreenUtil().setWidth(700),
+            height: ScreenUtil().setHeight(150),
             child: Card(
               elevation: 3,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -149,11 +149,11 @@ class _VaultWapPageState extends State<VaultWapPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: ScreenUtil().setWidth(750),
+            width: ScreenUtil().setWidth(700),
             height: ScreenUtil().setHeight(360),
             child: Card(
               elevation: 3,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -185,24 +185,24 @@ class _VaultWapPageState extends State<VaultWapPage> {
       },
       child: Container(
         color: MyColors.white,
-        width: ScreenUtil().setWidth(750),
+        width: ScreenUtil().setWidth(700),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(30)),
               child: ClipOval(
                 child: Image.asset(
                   '${item.pic1}',
-                  width: 50,
-                  height: 50,
+                  width: ScreenUtil().setWidth(55),
+                  height: ScreenUtil().setWidth(55),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(width: ScreenUtil().setWidth(20)),
+            SizedBox(width: ScreenUtil().setWidth(50)),
             Container(
-              width: ScreenUtil().setWidth(100),
+              width: ScreenUtil().setWidth(160),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -210,7 +210,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     child: Text(
                       '${item.depositTokenName}',
                       style: GoogleFonts.lato(
-                        fontSize: 20,
+                        fontSize: ScreenUtil().setSp(30),
                         color: MyColors.black,
                       ),
                     ),
@@ -220,7 +220,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     child: Text(
                       '${item.depositTokenName}',
                       style: GoogleFonts.lato(
-                        fontSize: 14,
+                        fontSize: ScreenUtil().setSp(20),
                         color: MyColors.grey700,
                       ),
                     ),
@@ -230,7 +230,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
             ),
             SizedBox(width: ScreenUtil().setWidth(50)),
             Container(
-              width: ScreenUtil().setWidth(100),
+              width: ScreenUtil().setWidth(160),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -238,17 +238,17 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     child: Text(
                       '${item.apy * 100}%',
                       style: GoogleFonts.lato(
-                        fontSize: 20,
+                        fontSize: ScreenUtil().setSp(30),
                         color: MyColors.black,
                       ),
                     ),
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(50)),
+                  SizedBox(height: ScreenUtil().setHeight(8)),
                   Container(
                     child: Text(
                       '回报率',
                       style: GoogleFonts.lato(
-                        fontSize: 14,
+                        fontSize: ScreenUtil().setSp(20),
                         color: MyColors.grey700,
                       ),
                     ),
@@ -260,7 +260,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
             Container(
               child: Card(
                 elevation: 2,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 child: InkWell(
                   onTap: () {
                     setState(() {
@@ -273,21 +273,22 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     });
                   },
                   child: Container(
-                    width: ScreenUtil().setWidth(50),
-                    height: ScreenUtil().setWidth(50),
+                    width: ScreenUtil().setWidth(60),
+                    height: ScreenUtil().setWidth(60),
                     color: MyColors.blue500,
                     alignment: Alignment.center,
                     child: Icon(
                       !_layoutFlag
                           ? CupertinoIcons.down_arrow
                           : (_layoutIndex == index ? CupertinoIcons.up_arrow : CupertinoIcons.down_arrow),
-                      size: 23,
+                      size: ScreenUtil().setSp(30),
                       color: MyColors.white,
                     ),
                   ),
                 ),
               ),
             ),
+            SizedBox(width: ScreenUtil().setWidth(25)),
           ],
         ),
       ),
@@ -542,18 +543,19 @@ class _VaultWapPageState extends State<VaultWapPage> {
   }
 
   Widget _appBarWidget(BuildContext context) {
+    String account = Provider.of<IndexProvider>(context).account;
     return AppBar(
       backgroundColor:  MyColors.lightBg,
       elevation: 0,
       titleSpacing: 0.0,
       title: Container(
         child: Text(
-          'Flash Finance',
+          'Flash Finance Account:' + '$account',
           style: GoogleFonts.lato(
             fontSize: ScreenUtil().setSp(38),
             color: Colors.black,
             fontWeight: FontWeight.bold,
-            letterSpacing: 1.0,
+            letterSpacing: 0.0,
             fontStyle: FontStyle.italic,
           ),
         ),
