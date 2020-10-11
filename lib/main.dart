@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final isNotMobile = !PlatformDetector().isMobile();
     return isNotMobile ? MaterialApp(
-      title: 'Vault BG-Finance',
+      title: 'Flash Finance',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
       home:VaultPcPage(),
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         const Locale('en', 'zh'),
       ],
     ) : MaterialApp(
-      title: 'Vault BG-Finance',
+      title: 'Flash Finance',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
       home: VaultWapPage(),
