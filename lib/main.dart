@@ -37,9 +37,11 @@ class MyApp extends StatelessWidget {
       home:VaultPcPage(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('zh', 'CH'),
+        const Locale('en', 'zh'),
       ],
     ) : MaterialApp(
       title: 'Vault BG-Finance',
@@ -48,25 +50,12 @@ class MyApp extends StatelessWidget {
       home: VaultWapPage(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
-        const FallbackCupertinoLocalisationsDelegate(),
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('zh', 'CH'),
+        const Locale('en', 'zh'),
       ],
     );
   }
-}
-
-class FallbackCupertinoLocalisationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
-  const FallbackCupertinoLocalisationsDelegate();
-
-  @override
-  bool isSupported(Locale locale) => true;
-
-  @override
-  Future<CupertinoLocalizations> load(Locale locale) =>
-      DefaultCupertinoLocalizations.load(locale);
-
-  @override
-  bool shouldReload(FallbackCupertinoLocalisationsDelegate old) => false;
 }
