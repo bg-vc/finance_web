@@ -1,3 +1,4 @@
+import 'package:finance_web/page/wap/vault_wap_page.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'Vault BG-Finance',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
-      home: Container(),
+      home: VaultWapPage(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         const FallbackCupertinoLocalisationsDelegate(),
