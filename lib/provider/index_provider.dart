@@ -1,3 +1,4 @@
+import 'package:finance_web/model/lang_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,6 +40,21 @@ class IndexProvider with ChangeNotifier {
     _account = value;
     notifyListeners();
   }
+
+  int _langType = 0;
+
+  int get langType => _langType;
+
+  changeLangType(int value) {
+    _langType = value;
+  }
+
+  List<LangModel> _langModels = List<LangModel>()
+    ..add(LangModel(id: 0, name: '简体中文'))
+    ..add(LangModel(id: 1, name: 'English'));
+
+  List<LangModel> get langModels => _langModels;
+
 
   /*String _depositAmount = '';
   String get depositAmount => _depositAmount;
