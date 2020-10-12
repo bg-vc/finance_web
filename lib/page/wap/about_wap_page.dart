@@ -32,7 +32,7 @@ class _AboutWapPageState extends State<AboutWapPage> {
     super.initState();
     if (mounted) {
       setState(() {
-        CommonProvider.changeHomeIndex(1);
+        CommonProvider.changeHomeIndex(2);
       });
     }
     _reloadAccount();
@@ -182,7 +182,7 @@ class _AboutWapPageState extends State<AboutWapPage> {
                 '${S.of(context).actionTitle2}',
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
-                  color: _homeIndex == 1 ? Colors.black : Colors.grey[700],
+                  color: _homeIndex == 2 ? Colors.black : Colors.grey[700],
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

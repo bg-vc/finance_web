@@ -182,7 +182,7 @@ class _SwapWapPageState extends State<SwapWapPage> {
                 '${S.of(context).actionTitle2}',
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
-                  color: _homeIndex == 1 ? Colors.black : Colors.grey[700],
+                  color: _homeIndex == 2 ? Colors.black : Colors.grey[700],
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
