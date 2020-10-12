@@ -233,7 +233,7 @@ class _SwapPcPageState extends State<SwapPcPage> {
       child: AlertDialog(
         elevation: 3,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30.0))
+            borderRadius: BorderRadius.all(Radius.circular(20.0))
         ),
         content: Container(
           width: 300,
@@ -290,7 +290,7 @@ class _SwapPcPageState extends State<SwapPcPage> {
       context: context,
       child: AlertDialog(
         elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))
         ),
         content: Container(
           width: 300,
