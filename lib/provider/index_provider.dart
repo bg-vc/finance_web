@@ -1,32 +1,27 @@
+import 'package:finance_web/generated/l10n.dart';
 import 'package:finance_web/model/lang_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 class IndexProvider with ChangeNotifier {
-  //深色模式 0: 关闭 1:开启
-  int _darkMode = 0;
-
-  int get darkMode => _darkMode;
-
-  String _darkModeKey = 'darkMode';
 
   void init() {
     SharedPreferences.getInstance().then((prefs) {
-      if (prefs.getInt(_darkModeKey) != null) {
-        int temp = prefs.getInt(_darkModeKey);
-        _darkMode = temp;
+      if (prefs.getInt(_langTypeKey) != null) {
+        int temp = prefs.getInt(_langTypeKey);
+        _langType = temp;
+      }
+      if (_langType == 0) {
+        S.load(Locale('zh', ''));
+      } else if (_langType == 1) {
+        S.load(Locale('en', ''));
       }
       notifyListeners();
     });
   }
 
-  void changeMode(int darkMode) async {
-    _darkMode = darkMode;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt(_darkModeKey, _darkMode);
-    notifyListeners();
-  }
+
 
   bool _tronFlag = false;
 
@@ -45,8 +40,18 @@ class IndexProvider with ChangeNotifier {
 
   int get langType => _langType;
 
-  changeLangType(int value) {
+  String _langTypeKey =  'langTypeKey';
+
+  changeLangType(int value) async {
     _langType = value;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(_langTypeKey, _langType);
+    if (_langType == 0) {
+      S.load(Locale('zh', ''));
+    } else if (_langType == 1) {
+      S.load(Locale('en', ''));
+    }
+    notifyListeners();
   }
 
   List<LangModel> _langModels = List<LangModel>()
@@ -55,21 +60,5 @@ class IndexProvider with ChangeNotifier {
 
   List<LangModel> get langModels => _langModels;
 
-
-  /*String _depositAmount = '';
-  String get depositAmount => _depositAmount;
-
-  changeDepositAmount(String value) {
-    _depositAmount = value;
-    notifyListeners();
-  }
-
-  String _withdrawAmount = '';
-  String get withdrawAmount => _withdrawAmount;
-
-  changeWithdrawAmount(String value) {
-    _withdrawAmount = value;
-    notifyListeners();
-  }*/
 
 }

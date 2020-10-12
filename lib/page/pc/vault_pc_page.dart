@@ -973,11 +973,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
     return InkWell(
       onTap: () {
         Provider.of<IndexProvider>(context, listen: false).changeLangType(index);
-        if (index == 0) {
-          S.load(Locale('zh', ''));
-        } else if (index == 1) {
-          S.load(Locale('en', ''));
-        }
         Navigator.pop(context);
       },
       child: Container(

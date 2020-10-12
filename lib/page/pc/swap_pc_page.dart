@@ -153,73 +153,77 @@ class _SwapPcPageState extends State<SwapPcPage> {
         break;
     }
     int langType = Provider.of<IndexProvider>(context).langType;
-    return InkWell(
-      child: index != 3 && index != 4 ?
-      Container(
-          color: MyColors.white,
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Text(
-              '$actionTitle',
-              style: GoogleFonts.lato(
-                fontSize: 16.0,
-                letterSpacing: 1,
-                color: _homeIndex == index ? MyColors.black : MyColors.grey700,
-                fontWeight: FontWeight.w500,
+    return Container(
+      color: MyColors.white,
+      child: InkWell(
+        child: index != 3 && index != 4 ?
+        Container(
+            color: MyColors.white,
+            child: Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Text(
+                '$actionTitle',
+                style: GoogleFonts.lato(
+                  fontSize: 16.0,
+                  letterSpacing: 1,
+                  color: _homeIndex == index ? MyColors.black : MyColors.grey700,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            ))
+            : index != 4 ?
+        Container(
+          color: MyColors.white,
+          child: Chip(
+            elevation: 3,
+            padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
+            backgroundColor: MyColors.blue500,
+            label: Text(
+              account == '' ? '$actionTitle' : account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length),
+              style: GoogleFonts.lato(
+                letterSpacing: 0.5,
+                color: MyColors.white,
+                fontSize: 15,
+              ),
             ),
-          ))
-          : index != 4 ?
-      Container(
-        color: MyColors.white,
-        child: Chip(
-          elevation: 3,
-          padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
-          backgroundColor: MyColors.blue500,
-          label: Text(
-            account == '' ? '$actionTitle' : account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length),
-            style: GoogleFonts.lato(
-              letterSpacing: 0.5,
-              color: MyColors.white,
-              fontSize: 15,
+          ),
+        ) : Container(
+          margin: EdgeInsets.only(left: 15),
+          color: MyColors.white,
+          child: Chip(
+            elevation: 3,
+            padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
+            backgroundColor: MyColors.white,
+            label: Text(
+              langType == 1 ? 'English' : '简体中文',
+              style: GoogleFonts.lato(
+                letterSpacing: 0.5,
+                color: MyColors.grey700,
+                fontSize: 15,
+              ),
             ),
           ),
         ),
-      ) : Container(
-        color: MyColors.white,
-        child: Chip(
-          elevation: 3,
-          padding: EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 20),
-          backgroundColor: MyColors.white,
-          label: Text(
-            langType == 1 ? 'English' : '简体中文',
-            style: GoogleFonts.lato(
-              letterSpacing: 0.5,
-              color: MyColors.grey700,
-              fontSize: 15,
-            ),
-          ),
-        ),
+        onTap: () async {
+          if (index != 3 && index != 4) {
+            CommonProvider.changeHomeIndex(index);
+          }
+          if (index == 0) {
+            Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
+          } else if (index == 1) {
+            Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
+          } else if (index == 2) {
+            Application.router.navigateTo(context, 'about', transition: TransitionType.fadeIn);
+          } else if (index == 3 && account == '') {
+            _showConnectWalletDialLog();
+          } else if (index == 4) {
+            _showLangTypeDialLog();
+          }
+        },
       ),
-      onTap: () async {
-        if (index != 3 && index != 4) {
-          CommonProvider.changeHomeIndex(index);
-        }
-        if (index == 0) {
-          Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
-        } else if (index == 1) {
-          Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
-        } else if (index == 2) {
-          Application.router.navigateTo(context, 'about', transition: TransitionType.fadeIn);
-        } else if (index == 3 && account == '') {
-          _showConnectWalletDialLog();
-        } else if (index == 4) {
-          _showLangTypeDialLog();
-        }
-      },
     );
   }
 
@@ -314,11 +318,6 @@ class _SwapPcPageState extends State<SwapPcPage> {
     return InkWell(
       onTap: () {
         Provider.of<IndexProvider>(context, listen: false).changeLangType(index);
-        if (index == 0) {
-          S.load(Locale('zh', ''));
-        } else if (index == 1) {
-          S.load(Locale('en', ''));
-        }
         Navigator.pop(context);
       },
       child: Container(
@@ -357,6 +356,7 @@ class _SwapPcPageState extends State<SwapPcPage> {
       ),
     );
   }
+
 
 
   _reloadAccount() async {
