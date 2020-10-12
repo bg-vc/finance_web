@@ -12,6 +12,7 @@ class CommonProvider {
     '交易',
     '关于',
     '连接钱包',
+    '简体中文',
   ];
   static List<String> get homeList => _homeList;
 

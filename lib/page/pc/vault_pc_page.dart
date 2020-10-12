@@ -1102,10 +1102,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
     });
   }
 
-  List<VaultRows> _vaultRows;
+  List<VaultRows> _vaultRows = List<VaultRows>();
 
   _getVaultData() async {
-    _vaultRows = List<VaultRows>();
     _vaultRows.add(VaultRows(
         id: 0,
         mineType: 1,

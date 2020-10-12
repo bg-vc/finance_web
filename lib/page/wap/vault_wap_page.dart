@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:finance_web/common/color.dart';
+import 'package:finance_web/model/asset_model.dart';
 import 'package:finance_web/model/vault_model.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
-import 'package:finance_web/util/common_util.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +29,14 @@ class _VaultWapPageState extends State<VaultWapPage> {
   Timer _timer;
   String _depositAmount = '';
   String _withdrawAmount = '';
+  String _harvestAmount = '';
+
 
   TextEditingController _depositAmountController;
   TextEditingController _withdrawAmountController;
+  TextEditingController _harvestAmountController;
+
+  int _selectAssetFilterIndex = 0;
 
   @override
   void initState() {
@@ -62,6 +67,9 @@ class _VaultWapPageState extends State<VaultWapPage> {
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _depositAmount.length))));
     _withdrawAmountController =  TextEditingController.fromValue(TextEditingValue(text: _withdrawAmount,
         selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _withdrawAmount.length))));
+    _harvestAmountController =  TextEditingController.fromValue(TextEditingValue(text: _harvestAmount,
+        selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: _harvestAmount.length))));
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: MyColors.white,
@@ -625,11 +633,67 @@ class _VaultWapPageState extends State<VaultWapPage> {
                 color: _homeIndex == 1 ? Colors.black87 : Colors.grey[700],
               ),
             ),
+            ListTile(
+              title:  Text(
+                '关于',
+                style: GoogleFonts.lato(
+                  fontSize: ScreenUtil().setSp(32),
+                  color: _homeIndex == 1 ? Colors.black : Colors.grey[700],
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: () {
+                setState(() {
+                  CommonProvider.changeHomeIndex(2);
+                });
+                Application.router.navigateTo(context, 'wap/about', transition: TransitionType.fadeIn);
+              },
+              leading: Icon(
+                Icons.file_copy_sharp,
+                color: _homeIndex == 2 ? Colors.black87 : Colors.grey[700],
+              ),
+            ),
+            ListTile(
+              title:  Text(
+                '我的',
+                style: GoogleFonts.lato(
+                  fontSize: ScreenUtil().setSp(32),
+                  color: Colors.grey[700],
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: () {
+              },
+              leading: Icon(
+                Icons.account_circle,
+                color: Colors.grey[700],
+              ),
+            ),
+            ListTile(
+              title:  Text(
+                '简体中文',
+                style: GoogleFonts.lato(
+                  fontSize: ScreenUtil().setSp(32),
+                  color: Colors.grey[700],
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap: () {
+              },
+              leading: Icon(
+                Icons.language,
+                color: Colors.grey[700],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
 
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
@@ -647,10 +711,9 @@ class _VaultWapPageState extends State<VaultWapPage> {
     });
   }
 
-  List<VaultRows> _vaultRows;
+  List<VaultRows> _vaultRows = List<VaultRows>();
 
   _getVaultData() async {
-    _vaultRows = List<VaultRows>();
     _vaultRows.add(VaultRows(
         id: 0,
         mineType: 1,
@@ -726,5 +789,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
         apy: 0.6512));
     setState(() {});
   }
+
+  List<AssetModel> _assetModels = List<AssetModel>();
+  _getAssetData() {
+    _assetModels.add(AssetModel(id: 0, tokenName: 'SUN', tokenType: 2, precision: 18, tokenAddress: ''));
+    _assetModels.add(AssetModel(id: 1, tokenName: 'TRX', tokenType: 1, precision: 6, tokenAddress: ''));
+    _assetModels.add(AssetModel(id: 2, tokenName: 'USDT', tokenType: 2, precision: 6, tokenAddress: ''));
+  }
+
 
 }
