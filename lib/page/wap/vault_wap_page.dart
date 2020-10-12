@@ -191,6 +191,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
           }
           _depositAmount = '';
           _withdrawAmount = '';
+          _harvestAmount = '';
         });
       },
       child: Container(
@@ -256,7 +257,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                   SizedBox(height: ScreenUtil().setHeight(8)),
                   Container(
                     child: Text(
-                      '回报率',
+                      '${S.of(context).vaultApy}',
                       style: GoogleFonts.lato(
                         fontSize: ScreenUtil().setSp(20),
                         color: MyColors.grey700,
@@ -560,7 +561,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
       titleSpacing: 0.0,
       title: Container(
         child: Text(
-          'Flash Finance Account:' + '$account',
+          'Flash Finance',
           style: GoogleFonts.lato(
             fontSize: ScreenUtil().setSp(38),
             color: Colors.black,
