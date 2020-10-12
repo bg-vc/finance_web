@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:finance_web/common/color.dart';
+import 'package:finance_web/generated/l10n.dart';
 import 'package:finance_web/model/asset_model.dart';
+import 'package:finance_web/model/lang_model.dart';
 import 'package:finance_web/model/vault_model.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
@@ -584,6 +586,8 @@ class _VaultWapPageState extends State<VaultWapPage> {
 
   Widget _drawerWidget(BuildContext context) {
     int _homeIndex = CommonProvider.homeIndex;
+    int langType = Provider.of<IndexProvider>(context).langType;
+    String account = Provider.of<IndexProvider>(context).account;
     return Drawer(
       child: Container(
         color: MyColors.white,
@@ -592,7 +596,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
           children: <Widget>[
             ListTile(
               title: Text(
-                '机枪池',
+                '${S.of(context).actionTitle0}',
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
                   color: _homeIndex == 0 ? Colors.black : Colors.grey[700],
@@ -614,7 +618,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
             ),
             ListTile(
               title:  Text(
-                '交易',
+                '${S.of(context).actionTitle1}',
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
                   color: _homeIndex == 1 ? Colors.black : Colors.grey[700],
@@ -635,7 +639,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
             ),
             ListTile(
               title:  Text(
-                '关于',
+                '${S.of(context).actionTitle2}',
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
                   color: _homeIndex == 1 ? Colors.black : Colors.grey[700],
@@ -655,8 +659,8 @@ class _VaultWapPageState extends State<VaultWapPage> {
               ),
             ),
             ListTile(
-              title:  Text(
-                '我的',
+              title: Text(
+                account == '' ? '${S.of(context).actionTitle3}' : account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length),
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
                   color: Colors.grey[700],
@@ -672,8 +676,8 @@ class _VaultWapPageState extends State<VaultWapPage> {
               ),
             ),
             ListTile(
-              title:  Text(
-                '简体中文',
+              title: Text(
+                langType == 1 ? 'English' : '简体中文',
                 style: GoogleFonts.lato(
                   fontSize: ScreenUtil().setSp(32),
                   color: Colors.grey[700],
@@ -682,6 +686,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                 overflow: TextOverflow.ellipsis,
               ),
               onTap: () {
+                _showLangTypeDialLog();
               },
               leading: Icon(
                 Icons.language,
@@ -694,6 +699,72 @@ class _VaultWapPageState extends State<VaultWapPage> {
     );
   }
 
+  _showLangTypeDialLog() {
+    List<LangModel> langModels = Provider.of<IndexProvider>(context, listen: false).langModels;
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18.0))
+        ),
+        content: Container(
+          width: ScreenUtil().setWidth(400),
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: langModels.length,
+            itemBuilder: (context, index) {
+              return _selectLangTypeItemWidget(context, index, langModels[index]);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _selectLangTypeItemWidget(BuildContext context, int index, LangModel item) {
+    int langType = Provider.of<IndexProvider>(context, listen: false).langType;
+    bool flag = index == langType ? true : false;
+    return InkWell(
+      onTap: () {
+        Provider.of<IndexProvider>(context, listen: false).changeLangType(index);
+        Navigator.pop(context);
+      },
+      child: Container(
+        width: ScreenUtil().setWidth(300),
+        padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(10)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: ScreenUtil().setWidth(200),
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${item.name}',
+                style: TextStyle(
+                  color: !flag ? Colors.black87 : Colors.blue[800],
+                  fontSize: ScreenUtil().setSp(30),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Container(
+              width: ScreenUtil().setWidth(100),
+              padding: EdgeInsets.only(right: ScreenUtil().setWidth(10)),
+              alignment: Alignment.centerRight,
+              child: !flag ? Container() : Icon(
+                Icons.check,
+                color: Colors.blue[800],
+                size: ScreenUtil().setSp(35),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
