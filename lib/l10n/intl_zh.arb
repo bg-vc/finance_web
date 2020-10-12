@@ -6,7 +6,7 @@
 
   "vaultBalance": "余额",
   "vaultDeposited": "已存",
-  "vaultApy": "回报",
+  "vaultApy": "回报率",
   "vaultDeposit": "存入",
   "vaultWithdraw": "赎回",
   "vaultHarvest": "收获"

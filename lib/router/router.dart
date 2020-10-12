@@ -19,5 +19,7 @@ class Routes {
 
     router.define('/wap/vault', handler: vaultWapHandler);
     router.define('/wap/swap', handler: swapWapHandler);
+    router.define('/wap/about', handler: aboutWapHandler);
+
   }
 }

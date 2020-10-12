@@ -1,6 +1,7 @@
 import 'package:finance_web/page/pc/about_pc_page.dart';
 import 'package:finance_web/page/pc/swap_pc_page.dart';
 import 'package:finance_web/page/pc/vault_pc_page.dart';
+import 'package:finance_web/page/wap/about_wap_page.dart';
 import 'package:finance_web/page/wap/swap_wap_page.dart';
 import 'package:finance_web/page/wap/vault_wap_page.dart';
 import 'package:fluro/fluro.dart';
@@ -30,4 +31,9 @@ Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
 Handler swapWapHandler =
 Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return SwapWapPage();
+});
+
+Handler aboutWapHandler =
+Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return AboutWapPage();
 });
