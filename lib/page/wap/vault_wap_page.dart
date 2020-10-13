@@ -9,6 +9,7 @@ import 'package:finance_web/model/vault_model.dart';
 import 'package:finance_web/provider/common_provider.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:finance_web/router/application.dart';
+import 'package:finance_web/util/common_util.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
     }
     _reloadAccount();
     _getVaultData();
+    _getAssetData();
   }
 
   @override
@@ -136,15 +138,17 @@ class _VaultWapPageState extends State<VaultWapPage> {
         children: <Widget>[
           Container(
             width: ScreenUtil().setWidth(700),
-            height: ScreenUtil().setHeight(150),
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _topBizWidget(context, item, index, 1),
-                ],
+              child: Container(
+                padding: EdgeInsets.only(top: ScreenUtil().setHeight(25), bottom: ScreenUtil().setHeight(25)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _topBizWidget(context, item, index, 1),
+                  ],
+                ),
               ),
             ),
           ),
@@ -160,17 +164,19 @@ class _VaultWapPageState extends State<VaultWapPage> {
         children: <Widget>[
           Container(
             width: ScreenUtil().setWidth(700),
-            height: ScreenUtil().setHeight(360),
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _topBizWidget(context, item, index, 2),
-                  SizedBox(height: ScreenUtil().setHeight(50)),
-                  _bottomBizWidget(context, item),
-                ],
+              child: Container(
+                padding: EdgeInsets.only(top: ScreenUtil().setHeight(25), bottom: ScreenUtil().setHeight(25)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _topBizWidget(context, item, index, 2),
+                    SizedBox(height: ScreenUtil().setHeight(25)),
+                    _bottomBizWidget(context, item),
+                  ],
+                ),
               ),
             ),
           ),
@@ -289,9 +295,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     color: MyColors.blue500,
                     alignment: Alignment.center,
                     child: Icon(
-                      !_layoutFlag
-                          ? CupertinoIcons.down_arrow
-                          : (_layoutIndex == index ? CupertinoIcons.up_arrow : CupertinoIcons.down_arrow),
+                      !_layoutFlag ? CupertinoIcons.down_arrow : (_layoutIndex == index ? CupertinoIcons.up_arrow : CupertinoIcons.down_arrow),
                       size: ScreenUtil().setSp(30),
                       color: MyColors.white,
                     ),
@@ -307,213 +311,333 @@ class _VaultWapPageState extends State<VaultWapPage> {
   }
 
   Widget _bottomBizWidget(BuildContext context, VaultRows item) {
-    /*return Container(
-      width: ScreenUtil().setWidth(750),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Container(
+      width: ScreenUtil().setWidth(700),
+      child: Column(
         children: <Widget>[
-          Container(
-            width: ScreenUtil().setWidth(300),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    '余额: 66.6126 ${item.depositTokenName}',
-                    style: GoogleFonts.lato(
-                      fontSize: 15,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(10)),
-                Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(side: BorderSide(width: 1.5, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                  child: MaterialButton(
-                    color: MyColors.white,
-                    disabledColor: MyColors.white,
-                    child: Container(
-                      width: ScreenUtil().setWidth(300),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: ScreenUtil().setWidth(340),
+                child: Column(
+                  children: <Widget>[
+                    Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-                      child: TextFormField(
-                        controller: _depositAmountController,
-                        enableInteractiveSelection: false,
-                        cursorColor: MyColors.black87,
-                        decoration: InputDecoration(
-                          hintText: '',
-                          hintStyle: GoogleFonts.lato(
-                            color: Colors.grey[500],
-                            fontSize: 16,
-                            letterSpacing: 0.5,
+                      child: Text(
+                        '${S.of(context).vaultBalance}:   66.6126 ${item.depositTokenName}',
+                        style: GoogleFonts.lato(
+                          fontSize: ScreenUtil().setSp(26),
+                          color: MyColors.grey700,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+                    Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(side: BorderSide(width: 1.2, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                      child: Container(
+                        width: ScreenUtil().setWidth(280),
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(30), top: ScreenUtil().setHeight(1), bottom: ScreenUtil().setHeight(1)),
+                        child: TextFormField(
+                          controller: _depositAmountController,
+                          enableInteractiveSelection: false,
+                          cursorColor: MyColors.black87,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            hintText: '',
+                            hintStyle: GoogleFonts.lato(
+                              color: Colors.grey[500],
+                              fontSize: ScreenUtil().setSp(26),
+                              letterSpacing: 0.5,
+                            ),
+                            border: InputBorder.none,
                           ),
-                          border: InputBorder.none,
-                        ),
-                        style: GoogleFonts.lato(
-                          color: MyColors.black87,
-                          fontSize: 16,
-                        ),
-                        //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
-                        inputFormatters: [MyNumberTextInputFormatter(digit:6)],
-                        onChanged: (String value) {
-                          if (value != null && value != '') {
-                            _depositAmount = value;
-                          } else {
-                            _depositAmount = '';
-                          }
-                          setState(() {});
-                        },
-                        onSaved: (String value) {},
-                        onEditingComplete: () {},
-                      ),
-                    ),
-                    shape: StadiumBorder(side: BorderSide(color: MyColors.white)),
-                  ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(10)),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _rateWidget(context, 1, 66.6126, 25),
-                      SizedBox(width: 25),
-                      _rateWidget(context, 1, 66.6126, 50),
-                      SizedBox(width: 25),
-                      _rateWidget(context, 1, 66.6126, 75),
-                      SizedBox(width: 25),
-                      _rateWidget(context, 1, 66.6126, 100),
-                    ],
-                  ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(30)),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    color: MyColors.white,
-                    child: Chip(
-                      elevation: 2,
-                      padding: EdgeInsets.only(left: 50, top: 15, bottom: 15, right: 50),
-                      backgroundColor: MyColors.blue500,
-                      label: Text(
-                        '存入',
-                        style: GoogleFonts.lato(
-                          letterSpacing: 0.5,
-                          color: MyColors.white,
-                          fontSize: 15,
+                          style: GoogleFonts.lato(
+                            color: MyColors.black87,
+                            fontSize: ScreenUtil().setSp(26),
+                          ),
+                          inputFormatters: [MyNumberTextInputFormatter(digit:6)],
+                          onChanged: (String value) {
+                            if (value != null && value != '') {
+                              _depositAmount = value;
+                            } else {
+                              _depositAmount = '';
+                            }
+                            setState(() {});
+                          },
+                          onSaved: (String value) {},
+                          onEditingComplete: () {},
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+                    Container(
+                      width: ScreenUtil().setWidth(350),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _rateWidget(context, 1, 66.6126, 25),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 1, 66.6126, 50),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 1, 66.6126, 75),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 1, 66.6126, 100),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(5)),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        color: MyColors.white,
+                        child: Chip(
+                          elevation: 2,
+                          padding: EdgeInsets.only(left: ScreenUtil().setWidth(20), top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(10), right: ScreenUtil().setWidth(20)),
+                          backgroundColor: MyColors.blue500,
+                          label: Text(
+                            '${S.of(context).vaultDeposit}',
+                            style: GoogleFonts.lato(
+                              letterSpacing: 0.5,
+                              color: MyColors.white,
+                              fontSize: ScreenUtil().setSp(24),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                width: ScreenUtil().setWidth(340),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${S.of(context).vaultDeposited}:   66.6126 ${item.depositTokenName}',
+                        style: GoogleFonts.lato(
+                          fontSize: ScreenUtil().setSp(26),
+                          color: MyColors.grey700,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+                    Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(side: BorderSide(width: 1.2, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                      child: Container(
+                        width: ScreenUtil().setWidth(280),
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(30), top: ScreenUtil().setHeight(1), bottom: ScreenUtil().setHeight(1)),
+                        child: TextFormField(
+                          controller: _withdrawAmountController,
+                          enableInteractiveSelection: false,
+                          cursorColor: MyColors.black87,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            hintText: '',
+                            hintStyle: GoogleFonts.lato(
+                              color: Colors.grey[500],
+                              fontSize: ScreenUtil().setSp(26),
+                              letterSpacing: 0.5,
+                            ),
+                            border: InputBorder.none,
+                          ),
+                          style: GoogleFonts.lato(
+                            color: MyColors.black87,
+                            fontSize: ScreenUtil().setSp(26),
+                          ),
+                          inputFormatters: [MyNumberTextInputFormatter(digit:6)],
+                          onChanged: (String value) {
+                            if (value != null && value != '') {
+                              _withdrawAmount = value;
+                            } else {
+                              _withdrawAmount = '';
+                            }
+                            setState(() {});
+                          },
+                          onSaved: (String value) {},
+                          onEditingComplete: () {},
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+                    Container(
+                      width: ScreenUtil().setWidth(350),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _rateWidget(context, 2, 66.6126, 25),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 2, 66.6126, 50),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 2, 66.6126, 75),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 2, 66.6126, 100),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(5)),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        color: MyColors.white,
+                        child: Chip(
+                          elevation: 2,
+                          padding: EdgeInsets.only(left: ScreenUtil().setWidth(20), top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(10), right: ScreenUtil().setWidth(20)),
+                          backgroundColor: MyColors.blue500,
+                          label: Text(
+                            '${S.of(context).vaultWithdraw}',
+                            style: GoogleFonts.lato(
+                              letterSpacing: 0.5,
+                              color: MyColors.white,
+                              fontSize: ScreenUtil().setSp(24),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(width: 60),
-          Container(
-            width: 400,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    '20.5600 ${item.depositTokenName}',
-                    style: GoogleFonts.lato(
-                      fontSize: 15,
-                      color: MyColors.grey700,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(side: BorderSide(width: 1.5, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                  child: MaterialButton(
-                    elevation: 3,
-                    color: MyColors.white,
-                    disabledColor: MyColors.white,
-                    child: Container(
-                      width: 500,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 10),
-                      child: TextFormField(
-                        controller: _withdrawAmountController,
-                        enableInteractiveSelection: false,
-                        cursorColor: MyColors.black87,
-                        decoration: InputDecoration(
-                          hintText: '',
-                          hintStyle: GoogleFonts.lato(
-                            color: Colors.grey[500],
-                            fontSize: 16,
-                            letterSpacing: 0.5,
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: ScreenUtil().setWidth(680),
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                      hoverColor: MyColors.white,
+                      onTap: () {
+                        _showAssetFilterDialLog();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: ScreenUtil().setWidth(100),
+                            padding: EdgeInsets.only(top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(5)),
+                            decoration: BoxDecoration(
+                              color: MyColors.blue500,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Container(
+                              width: ScreenUtil().setWidth(100),
+                              alignment: Alignment.center,
+                              child: Text(
+                                '${_assetModels[_selectAssetFilterIndex].tokenName}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: ScreenUtil().setSp(26),
+                                ),
+                              ),
+                            ),
                           ),
-                          border: InputBorder.none,
-                        ),
-                        style: GoogleFonts.lato(
-                          color: MyColors.black87,
-                          fontSize: 16,
-                        ),
-                        //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
-                        inputFormatters: [MyNumberTextInputFormatter(digit:6)],
-                        onChanged: (String value) {
-                          if (value != null && value != '') {
-                            _withdrawAmount = value;
-                          } else {
-                            _withdrawAmount = '';
-                          }
-                          setState(() {});
-                        },
-                        onSaved: (String value) {},
-                        onEditingComplete: () {},
+                          SizedBox(width: ScreenUtil().setWidth(10)),
+                          Container(
+                            child: Text(
+                              '20.5600 ${_assetModels[_selectAssetFilterIndex].tokenName}',
+                              style: GoogleFonts.lato(
+                                fontSize: ScreenUtil().setSp(26),
+                                color: MyColors.grey700,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    shape:
-                    StadiumBorder(side: BorderSide(color: MyColors.white)),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _rateWidget(context, 2, 20.5600, 25),
-                      SizedBox(width: 25),
-                      _rateWidget(context, 2, 20.5600, 50),
-                      SizedBox(width: 25),
-                      _rateWidget(context, 2, 20.5600, 75),
-                      SizedBox(width: 25),
-                      _rateWidget(context, 2, 20.5600, 100),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    color: MyColors.white,
-                    child: Chip(
-                      elevation: 2,
-                      padding: EdgeInsets.only(
-                          left: 50, top: 15, bottom: 15, right: 50),
-                      backgroundColor: MyColors.blue500,
-                      label: Text(
-                        '赎回',
-                        style: GoogleFonts.lato(
-                          letterSpacing: 0.5,
-                          color: MyColors.white,
-                          fontSize: 15,
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+                    Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(side: BorderSide(width: 1.2, color: Colors.grey[300]), borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                      child: Container(
+                        width: ScreenUtil().setWidth(350),
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(30), top: ScreenUtil().setHeight(1), bottom: ScreenUtil().setHeight(1)),
+                        child: TextFormField(
+                          controller: _harvestAmountController,
+                          enableInteractiveSelection: false,
+                          cursorColor: MyColors.black87,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            hintText: '',
+                            hintStyle: GoogleFonts.lato(
+                              color: Colors.grey[500],
+                              fontSize: 16,
+                              letterSpacing: 0.5,
+                            ),
+                            border: InputBorder.none,
+                          ),
+                          style: GoogleFonts.lato(
+                            color: MyColors.black87,
+                            fontSize: ScreenUtil().setSp(26),
+                          ),
+                          inputFormatters: [MyNumberTextInputFormatter(digit:6)],
+                          onChanged: (String value) {
+                            if (value != null && value != '') {
+                              _harvestAmount = value;
+                            } else {
+                              _harvestAmount = '';
+                            }
+                            setState(() {});
+                          },
+                          onSaved: (String value) {},
+                          onEditingComplete: () {},
+                        ),
+                      ),
+                      ),
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+                    Container(
+                      width: ScreenUtil().setWidth(350),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _rateWidget(context, 3, 66.6126, 25),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 3, 66.6126, 50),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 3, 66.6126, 75),
+                          SizedBox(width: ScreenUtil().setWidth(0)),
+                          _rateWidget(context, 3, 66.6126, 100),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(5)),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        color: MyColors.white,
+                        child: Chip(
+                          elevation: 2,
+                          padding: EdgeInsets.only(left: ScreenUtil().setWidth(20), top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(10), right: ScreenUtil().setWidth(20)),
+                          backgroundColor: MyColors.blue500,
+                          label: Text(
+                            '${S.of(context).vaultHarvest}',
+                            style: GoogleFonts.lato(
+                              letterSpacing: 0.5,
+                              color: MyColors.white,
+                              fontSize: ScreenUtil().setSp(24),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
-    );*/
-    return Container();
+    );
   }
 
   Widget _rateWidget(BuildContext context, int type, double balance, int rate) {
@@ -532,20 +656,22 @@ class _VaultWapPageState extends State<VaultWapPage> {
             setState(() {
               if (type == 1) {
                 _depositAmount = value.toString();
-              } else {
+              } else if (type == 2) {
                 _withdrawAmount = value.toString();
+              } else if (type == 3) {
+                _harvestAmount = value.toString();
               }
             });
           }
         },
         child: Container(
-          padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
+          padding: EdgeInsets.only(left: ScreenUtil().setWidth(15), top: ScreenUtil().setHeight(8), bottom: ScreenUtil().setHeight(8), right: ScreenUtil().setWidth(15)),
           child: Text(
             '$rate%',
             style: GoogleFonts.lato(
               letterSpacing: 0.5,
               color: Colors.blue[800],
-              fontSize: 14,
+              fontSize: ScreenUtil().setSp(20),
             ),
           ),
         ),
@@ -554,14 +680,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
   }
 
   Widget _appBarWidget(BuildContext context) {
-    String account = Provider.of<IndexProvider>(context).account;
     return AppBar(
       backgroundColor:  MyColors.lightBg,
       elevation: 0,
       titleSpacing: 0.0,
       title: Container(
         child: Text(
-          'Flash Finance',
+          'Flash Finance1',
           style: GoogleFonts.lato(
             fontSize: ScreenUtil().setSp(38),
             color: Colors.black,
@@ -766,6 +891,74 @@ class _VaultWapPageState extends State<VaultWapPage> {
       ),
     );
   }
+
+  _showAssetFilterDialLog() {
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18.0))
+        ),
+        content: Container(
+          width: ScreenUtil().setWidth(400),
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: _assetModels.length,
+            itemBuilder: (context, index) {
+              return _selectAssetItemWidget(context, index, _assetModels[index]);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _selectAssetItemWidget(BuildContext context, int index, AssetModel item) {
+    bool flag = index == _selectAssetFilterIndex ? true : false;
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _selectAssetFilterIndex = index;
+          Navigator.pop(context);
+        });
+      },
+      child: Container(
+        width: ScreenUtil().setWidth(300),
+        padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(10)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: ScreenUtil().setWidth(200),
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${item.tokenName}',
+                style: TextStyle(
+                  color: !flag ? Colors.black87 : Colors.blue[800],
+                  fontSize: ScreenUtil().setSp(30),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Container(
+              width: ScreenUtil().setWidth(100),
+              padding: EdgeInsets.only(right: ScreenUtil().setWidth(10)),
+              alignment: Alignment.centerRight,
+              child: !flag ? Container() : Icon(
+                Icons.check,
+                color: Colors.blue[800],
+                size: ScreenUtil().setSp(35),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 
   _reloadAccount() async {
     _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) async {
