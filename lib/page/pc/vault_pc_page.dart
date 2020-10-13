@@ -142,15 +142,17 @@ class _VaultPcPageState extends State<VaultPcPage> {
         children: <Widget>[
           Container(
             width: 1000,
-            height: 120,
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _topBizWidget(context, item, index, 1),
-                ],
+              child: Container(
+                padding: EdgeInsets.only(top: 25, bottom: 25),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _topBizWidget(context, item, index, 1),
+                  ],
+                ),
               ),
             ),
           ),
@@ -166,17 +168,19 @@ class _VaultPcPageState extends State<VaultPcPage> {
         children: <Widget>[
           Container(
             width: 1000,
-            height: 360,
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _topBizWidget(context, item, index, 2),
-                  SizedBox(height: 40),
-                  _bottomBizWidget(context, item),
-                ],
+              child: Container(
+                padding: EdgeInsets.only(top: 25, bottom: 25),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _topBizWidget(context, item, index, 2),
+                    SizedBox(height: 30),
+                    _bottomBizWidget(context, item),
+                  ],
+                ),
               ),
             ),
           ),
@@ -385,6 +389,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       fontSize: 15,
                       color: MyColors.grey700,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -484,6 +490,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       fontSize: 15,
                       color: MyColors.grey700,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -611,6 +619,8 @@ class _VaultPcPageState extends State<VaultPcPage> {
                             fontSize: 15,
                             color: MyColors.grey700,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       )
                     ],
