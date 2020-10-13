@@ -1173,25 +1173,6 @@ class _VaultPcPageState extends State<VaultPcPage> {
         pic2: 'images/wbtt.png',
         contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
         apy: 0.6512));
-
-    _vaultRows.add(VaultRows(
-        id: 4,
-        mineType: 1,
-        depositTokenName: 'JST',
-        depositTokenType: 2,
-        pic1: 'images/jst.png',
-        pic2: 'images/jst.png',
-        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
-        apy: 0.5632));
-    _vaultRows.add(VaultRows(
-        id: 5,
-        mineType: 1,
-        depositTokenName: 'WBTT',
-        depositTokenType: 2,
-        pic1: 'images/wbtt.png',
-        pic2: 'images/wbtt.png',
-        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
-        apy: 0.6512));
     setState(() {});
   }
 
