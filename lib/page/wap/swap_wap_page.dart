@@ -235,7 +235,7 @@ class _SwapWapPageState extends State<SwapWapPage> {
       context: context,
       child: AlertDialog(
         elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))
         ),
         content: Container(
           width: ScreenUtil().setWidth(400),

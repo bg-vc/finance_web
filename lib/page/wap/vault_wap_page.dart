@@ -831,7 +831,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
       context: context,
       child: AlertDialog(
         elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))
         ),
         content: Container(
           width: ScreenUtil().setWidth(400),
@@ -897,7 +897,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
       context: context,
       child: AlertDialog(
         elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))
         ),
         content: Container(
           width: ScreenUtil().setWidth(400),
