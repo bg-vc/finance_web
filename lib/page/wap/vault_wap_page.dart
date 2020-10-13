@@ -287,6 +287,9 @@ class _VaultWapPageState extends State<VaultWapPage> {
                       } else {
                         _layoutFlag = false;
                       }
+                      _depositAmount = '';
+                      _withdrawAmount = '';
+                      _harvestAmount = '';
                     });
                   },
                   child: Container(

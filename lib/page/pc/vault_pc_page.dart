@@ -346,6 +346,9 @@ class _VaultPcPageState extends State<VaultPcPage> {
                       } else {
                         _layoutFlag = false;
                       }
+                      _depositAmount = '';
+                      _withdrawAmount = '';
+                      _harvestAmount = '';
                     });
                   },
                   child: Container(
