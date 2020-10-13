@@ -106,7 +106,7 @@ class _AboutPcPageState extends State<AboutPcPage> {
         ),
       ),
       backgroundColor: MyColors.white,
-      elevation: 2.5,
+      elevation: 0.0,
       centerTitle: false,
       actions: _actionWidget(context),
     );

@@ -775,7 +775,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
         ),
       ),
       backgroundColor: MyColors.white,
-      elevation: 2.5,
+      elevation: 0.0,
       centerTitle: false,
       actions: _actionWidget(context),
     );
