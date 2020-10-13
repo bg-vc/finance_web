@@ -230,7 +230,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
                     child: Text(
                       '${item.depositTokenName}',
                       style: GoogleFonts.lato(
-                        fontSize: 20,
+                        fontSize: 19,
                         color: MyColors.black,
                       ),
                     ),
@@ -258,9 +258,11 @@ class _FarmPcPageState extends State<FarmPcPage> {
                     child: Text(
                       '66.6126 ${item.depositTokenName}',
                       style: GoogleFonts.lato(
-                        fontSize: 20,
+                        fontSize: 19,
                         color: MyColors.black,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   SizedBox(height: 8),
@@ -286,9 +288,11 @@ class _FarmPcPageState extends State<FarmPcPage> {
                     child: Text(
                       '20.5600 ${item.depositTokenName}',
                       style: GoogleFonts.lato(
-                        fontSize: 20,
+                        fontSize: 19,
                         color: MyColors.black,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   SizedBox(height: 8),
@@ -314,7 +318,7 @@ class _FarmPcPageState extends State<FarmPcPage> {
                     child: Text(
                       '${item.apy * 100}%',
                       style: GoogleFonts.lato(
-                        fontSize: 20,
+                        fontSize: 19,
                         color: MyColors.black,
                       ),
                     ),
