@@ -93,28 +93,18 @@ class _AboutWapPageState extends State<AboutWapPage> {
   }
 
   Widget _appBarWidget(BuildContext context) {
-    String account = Provider.of<IndexProvider>(context).account;
     return AppBar(
       backgroundColor:  MyColors.lightBg,
       elevation: 0,
       titleSpacing: 0.0,
       title: Container(
-        child: Text(
-          'Flash Finance',
-          style: GoogleFonts.lato(
-            fontSize: ScreenUtil().setSp(38),
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.0,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
+        child: Image.asset('images/aaa.png', fit: BoxFit.contain, width: ScreenUtil().setWidth(110), height: ScreenUtil().setWidth(110)),
       ),
       leading: IconButton(
         hoverColor: MyColors.white,
         icon: Container(
           margin: EdgeInsets.only(top: ScreenUtil().setHeight(5)),
-          child: Icon(Icons.menu, size: ScreenUtil().setWidth(53), color: Colors.black87),
+          child: Icon(Icons.menu, size: ScreenUtil().setWidth(55), color: Colors.black87),
         ),
         onPressed: () {
           _scaffoldKey.currentState.openDrawer();

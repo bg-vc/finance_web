@@ -325,11 +325,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        '${S.of(context).vaultBalance}:   66.6126 ${item.depositTokenName}',
+                        '${S.of(context).vaultBalance}:   8788.80 ${item.depositTokenName}',
                         style: GoogleFonts.lato(
                           fontSize: ScreenUtil().setSp(26),
                           color: MyColors.grey700,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(10)),
@@ -378,13 +380,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          _rateWidget(context, 1, 66.6126, 25),
+                          _rateWidget(context, 1, 8788.80, 25),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 1, 66.6126, 50),
+                          _rateWidget(context, 1, 8788.80, 50),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 1, 66.6126, 75),
+                          _rateWidget(context, 1, 8788.80, 75),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 1, 66.6126, 100),
+                          _rateWidget(context, 1, 8788.80, 100),
                         ],
                       ),
                     ),
@@ -418,11 +420,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        '${S.of(context).vaultDeposited}:   66.6126 ${item.depositTokenName}',
+                        '${S.of(context).vaultDeposited}:   56818.46 ${item.depositTokenName}',
                         style: GoogleFonts.lato(
                           fontSize: ScreenUtil().setSp(26),
                           color: MyColors.grey700,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(10)),
@@ -471,13 +475,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          _rateWidget(context, 2, 66.6126, 25),
+                          _rateWidget(context, 2, 56818.46, 25),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 2, 66.6126, 50),
+                          _rateWidget(context, 2, 56818.46, 50),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 2, 66.6126, 75),
+                          _rateWidget(context, 2, 56818.46, 75),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 2, 66.6126, 100),
+                          _rateWidget(context, 2, 56818.46, 100),
                         ],
                       ),
                     ),
@@ -524,7 +528,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                         children: <Widget>[
                           Container(
                             width: ScreenUtil().setWidth(100),
-                            padding: EdgeInsets.only(top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(5)),
+                            padding: EdgeInsets.only(left: ScreenUtil().setWidth(5), top: ScreenUtil().setHeight(8), bottom: ScreenUtil().setHeight(8), right: ScreenUtil().setWidth(5)),
                             decoration: BoxDecoration(
                               color: MyColors.blue500,
                               borderRadius: BorderRadius.circular(5.0),
@@ -544,11 +548,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
                           SizedBox(width: ScreenUtil().setWidth(10)),
                           Container(
                             child: Text(
-                              '20.5600 ${_assetModels[_selectAssetFilterIndex].tokenName}',
+                              '7862.56 ${_assetModels[_selectAssetFilterIndex].tokenName}',
                               style: GoogleFonts.lato(
                                 fontSize: ScreenUtil().setSp(26),
                                 color: MyColors.grey700,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           )
                         ],
@@ -600,13 +606,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          _rateWidget(context, 3, 66.6126, 25),
+                          _rateWidget(context, 3, 7862.56, 25),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 3, 66.6126, 50),
+                          _rateWidget(context, 3, 7862.56, 50),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 3, 66.6126, 75),
+                          _rateWidget(context, 3, 7862.56, 75),
                           SizedBox(width: ScreenUtil().setWidth(0)),
-                          _rateWidget(context, 3, 66.6126, 100),
+                          _rateWidget(context, 3, 7862.56, 100),
                         ],
                       ),
                     ),
@@ -685,22 +691,13 @@ class _VaultWapPageState extends State<VaultWapPage> {
       elevation: 0,
       titleSpacing: 0.0,
       title: Container(
-        child: Text(
-          'Flash Finance1',
-          style: GoogleFonts.lato(
-            fontSize: ScreenUtil().setSp(38),
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.0,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
+        child: Image.asset('images/aaa.png', fit: BoxFit.contain, width: ScreenUtil().setWidth(110), height: ScreenUtil().setWidth(110)),
       ),
       leading: IconButton(
         hoverColor: MyColors.white,
         icon: Container(
           margin: EdgeInsets.only(top: ScreenUtil().setHeight(5)),
-          child: Icon(Icons.menu, size: ScreenUtil().setWidth(53), color: Colors.black87),
+          child: Icon(Icons.menu, size: ScreenUtil().setWidth(55), color: Colors.black87),
         ),
         onPressed: () {
           _scaffoldKey.currentState.openDrawer();
@@ -1034,24 +1031,6 @@ class _VaultWapPageState extends State<VaultWapPage> {
         contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
         apy: 0.6512));
 
-    _vaultRows.add(VaultRows(
-        id: 4,
-        mineType: 1,
-        depositTokenName: 'JST',
-        depositTokenType: 2,
-        pic1: 'images/jst.png',
-        pic2: 'images/jst.png',
-        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
-        apy: 0.5632));
-    _vaultRows.add(VaultRows(
-        id: 5,
-        mineType: 1,
-        depositTokenName: 'WBTT',
-        depositTokenType: 2,
-        pic1: 'images/wbtt.png',
-        pic2: 'images/wbtt.png',
-        contractAddress: 'TPSrDszrQoHj1Ehekz52RCCB7r5jT3KBTY',
-        apy: 0.6512));
     setState(() {});
   }
 
