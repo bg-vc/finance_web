@@ -212,7 +212,7 @@ class _SwapPcPageState extends State<SwapPcPage> {
             CommonProvider.changeHomeIndex(index);
           }
           if (index == 0) {
-            Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
+            Application.router.navigateTo(context, 'farm', transition: TransitionType.fadeIn);
           } else if (index == 1) {
             Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
           } else if (index == 2) {

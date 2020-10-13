@@ -22,12 +22,12 @@ import 'dart:js' as js;
 
 import 'package:url_launcher/url_launcher.dart';
 
-class VaultPcPage extends StatefulWidget {
+class FarmPcPage extends StatefulWidget {
   @override
-  _VaultPcPageState createState() => _VaultPcPageState();
+  _FarmPcPageState createState() => _FarmPcPageState();
 }
 
-class _VaultPcPageState extends State<VaultPcPage> {
+class _FarmPcPageState extends State<FarmPcPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   int _layoutIndex = -1;
   bool _layoutFlag = false;
@@ -881,7 +881,7 @@ class _VaultPcPageState extends State<VaultPcPage> {
             CommonProvider.changeHomeIndex(index);
           }
           if (index == 0) {
-            Application.router.navigateTo(context, 'vault', transition: TransitionType.fadeIn);
+            Application.router.navigateTo(context, 'farm', transition: TransitionType.fadeIn);
           } else if (index == 1) {
             Application.router.navigateTo(context, 'swap', transition: TransitionType.fadeIn);
           } else if (index == 2) {

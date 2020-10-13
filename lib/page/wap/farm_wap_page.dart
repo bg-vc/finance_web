@@ -19,12 +19,12 @@ import 'dart:js' as js;
 
 import 'package:provider/provider.dart';
 
-class VaultWapPage extends StatefulWidget {
+class FarmWapPage extends StatefulWidget {
   @override
-  _VaultWapPageState createState() => _VaultWapPageState();
+  _FarmWapPageState createState() => _FarmWapPageState();
 }
 
-class _VaultWapPageState extends State<VaultWapPage> {
+class _FarmWapPageState extends State<FarmWapPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
   int _layoutIndex = -1;
   bool _layoutFlag = false;
@@ -756,7 +756,7 @@ class _VaultWapPageState extends State<VaultWapPage> {
                 setState(() {
                   CommonProvider.changeHomeIndex(1);
                 });
-                Application.router.navigateTo(context, 'wap/swap', transition: TransitionType.fadeIn);
+                Application.router.navigateTo(context, 'wap/farm', transition: TransitionType.fadeIn);
               },
               leading: Icon(
                 Icons.broken_image,

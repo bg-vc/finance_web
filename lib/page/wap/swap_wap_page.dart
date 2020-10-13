@@ -139,7 +139,7 @@ class _SwapWapPageState extends State<SwapWapPage> {
                 setState(() {
                   CommonProvider.changeHomeIndex(0);
                 });
-                Application.router.navigateTo(context, 'wap/vault', transition: TransitionType.fadeIn);
+                Application.router.navigateTo(context, 'wap/farm', transition: TransitionType.fadeIn);
               },
               leading: Icon(
                 Icons.assistant,

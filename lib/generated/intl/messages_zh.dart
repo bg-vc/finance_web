@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "actionTitle0" : MessageLookupByLibrary.simpleMessage("机枪池"),
+    "actionTitle0" : MessageLookupByLibrary.simpleMessage("挖矿"),
     "actionTitle1" : MessageLookupByLibrary.simpleMessage("交易"),
     "actionTitle2" : MessageLookupByLibrary.simpleMessage("关于"),
     "actionTitle3" : MessageLookupByLibrary.simpleMessage("连接钱包"),

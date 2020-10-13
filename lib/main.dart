@@ -1,4 +1,4 @@
-import 'package:finance_web/page/wap/vault_wap_page.dart';
+import 'package:finance_web/page/wap/farm_wap_page.dart';
 import 'package:finance_web/provider/index_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import 'common/platform.dart';
 import 'generated/l10n.dart';
-import 'page/pc/vault_pc_page.dart';
+import 'page/pc/farm_pc_page.dart';
 import 'router/application.dart';
 import 'router/router.dart';
 
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'Flash Finance',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
-      home: isNotMobile ? VaultPcPage() : VaultWapPage(),
+      home: isNotMobile ? FarmPcPage() : FarmWapPage(),
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

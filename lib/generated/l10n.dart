@@ -33,10 +33,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Vault`
+  /// `Farm`
   String get actionTitle0 {
     return Intl.message(
-      'Vault',
+      'Farm',
       name: 'actionTitle0',
       desc: '',
       args: [],
