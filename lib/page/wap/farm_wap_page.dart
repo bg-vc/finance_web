@@ -529,21 +529,24 @@ class _FarmWapPageState extends State<FarmWapPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Container(
-                            width: ScreenUtil().setWidth(100),
-                            padding: EdgeInsets.only(left: ScreenUtil().setWidth(5), top: ScreenUtil().setHeight(8), bottom: ScreenUtil().setHeight(8), right: ScreenUtil().setWidth(5)),
-                            decoration: BoxDecoration(
-                              color: MyColors.blue500,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
+                          Card(
+                            elevation: 0.0,
                             child: Container(
                               width: ScreenUtil().setWidth(100),
-                              alignment: Alignment.center,
-                              child: Text(
-                                '${_assetModels[_selectAssetFilterIndex].tokenName}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: ScreenUtil().setSp(26),
+                              padding: EdgeInsets.only(left: ScreenUtil().setWidth(5), top: ScreenUtil().setHeight(8), bottom: ScreenUtil().setHeight(8), right: ScreenUtil().setWidth(5)),
+                              decoration: BoxDecoration(
+                                color: MyColors.blue500,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Container(
+                                width: ScreenUtil().setWidth(100),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '${_assetModels[_selectAssetFilterIndex].tokenName}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: ScreenUtil().setSp(26),
+                                  ),
                                 ),
                               ),
                             ),
@@ -553,7 +556,7 @@ class _FarmWapPageState extends State<FarmWapPage> {
                             child: Text(
                               '7862.56 ${_assetModels[_selectAssetFilterIndex].tokenName}',
                               style: GoogleFonts.lato(
-                                fontSize: ScreenUtil().setSp(26),
+                                fontSize: ScreenUtil().setSp(24),
                                 color: MyColors.grey700,
                               ),
                               maxLines: 1,
@@ -735,7 +738,7 @@ class _FarmWapPageState extends State<FarmWapPage> {
                 setState(() {
                   CommonProvider.changeHomeIndex(0);
                 });
-                Application.router.navigateTo(context, 'wap/vault', transition: TransitionType.fadeIn);
+                Application.router.navigateTo(context, 'wap/farm', transition: TransitionType.fadeIn);
               },
               leading: Icon(
                 Icons.assistant,
@@ -756,7 +759,7 @@ class _FarmWapPageState extends State<FarmWapPage> {
                 setState(() {
                   CommonProvider.changeHomeIndex(1);
                 });
-                Application.router.navigateTo(context, 'wap/farm', transition: TransitionType.fadeIn);
+                Application.router.navigateTo(context, 'wap/swap', transition: TransitionType.fadeIn);
               },
               leading: Icon(
                 Icons.broken_image,

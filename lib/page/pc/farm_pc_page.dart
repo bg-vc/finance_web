@@ -599,21 +599,24 @@ class _FarmPcPageState extends State<FarmPcPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        width: 70,
-                        padding: EdgeInsets.only(top: 5, bottom: 5),
-                        decoration: BoxDecoration(
-                          color: MyColors.blue500,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                      Card(
+                        elevation: 0.0,
                         child: Container(
                           width: 70,
-                          alignment: Alignment.center,
-                          child: Text(
-                            '${_assetModels[_selectAssetFilterIndex].tokenName}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
+                          padding: EdgeInsets.only(top: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                            color: MyColors.blue500,
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          child: Container(
+                            width: 70,
+                            alignment: Alignment.center,
+                            child: Text(
+                              '${_assetModels[_selectAssetFilterIndex].tokenName}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ),
